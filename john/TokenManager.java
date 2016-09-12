@@ -1,27 +1,44 @@
 package john;
 
+import java.util.List;
 
+import john.Location;
 
-public class TokenSet {
+/** the parent class for RoadManager and SettlementManager. Contains
+ * data and functionality that the two classes have in common. Not meant
+ * to be instantiated.
+ */
+class TokenManager {
 
-	private RoadManager roads;
-	private SettlementManager settlements;
-	private CityManager cities;
+	protected int remaining;
+	protected List<Location> built;
 
-	public RoadManager getRoads() {
-		return roads;
+	public TokenManager() {
+
 	}
 
-	public SettlementManager getSettlements() {
-		return settlements;
+	/**
+	 * @return the number of unused tokens.
+	 */
+	public int getRemaining() {
+		return remaining;
 	}
 
-	public CityManager getCities() {
-		return cities;
+	/**
+	 * @return a list of map locations where tokens have been placed
+	 */
+	public List<Location> getBuilt() {
+		return built;	
 	}
 
-	public ResourceSet getResourcesForRoll(int number) {
-
+	/** take a token from the player's reserve, and transfer it to a
+	 * location on the map.
+	 * @param location the place where the token will be 'built' on the
+	 * map
+	 */
+	public void build(Location location) {
+		remaining--;
+		built.add(location);
 	}
 
 }

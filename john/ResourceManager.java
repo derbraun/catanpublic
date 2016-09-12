@@ -5,7 +5,7 @@ package john;
 public class ResourceManager {
 
 	private int amount;
-	private Market market;
+	private ResourceManager resourceManager;
 
 	public ResourceManager() {
 		
@@ -23,7 +23,7 @@ public class ResourceManager {
 		amount -= removeAmount;
 	}
 
-	public Market getMarket() {
+	public ResourceManager getResourceManager() {
 		return market;
 	}
 

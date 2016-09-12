@@ -4,111 +4,73 @@ import String;
 
 import john.Game;
 import john.TokenManager;
-import john.DevelopmentCardManager;
-import john.Market;
+import john.DevelopmentCardSet;
+import john.ResourceSet;
 import john.User;
 
+/** Represents a player in a single game of Settlers of Catan. Each
+ * user may play multiple games at a time, so a Player represents an
+ * instance of a single user playing a single game.
+ */
 public class Player {
 
-	private int points;
-	private int numSoldiers;
 	private String color;
-	private Game game;
-	private TokenManager tokens;
-	private DevelopmentCardManager developmentCards;
-	private Market market;
+	private TokenSet tokens;
+	private DevelopmentCardSet developmentCards;
+	private ResourceSet resources;
 	private User user;
 
+	/** Constructor
+	 * @param user the User object connected to this player
+	 * @param color the color the player will be represented by
+	 */
 	public Player(User user, String color) {
 
 	}
 
-	public void addPoint() {
-		points++;
-	}
-
-	public void addPoints(int numPoints) {
-		points += numPoints;
-	}
-
-	public void removePoint() {
-		points--;
-	}
-
-	public void removePoints(int numPoints) {
-		points -= numPoints;
-	}
-
-	public int getNumPoints() {
-		return points;
-	}
-
-	public void addSoldier() {
-		numSoldiers++;
-	}
-
-	public int getNumSoldiers() {
-		return numSoldiers;
-	}
-
+	/**
+	 * @return the Player's color
+	 */
 	public String getColor() {
 		return color;
 	}
 
-	public void setGame(Game aGame) {
-		game = aGame;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
+	/**
+	 * @return the name of the User object associated with this Player
+	 */
 	public String getName() {
 
 	}
 
+	/**
+	 * @return an object containing information about the player's
+	 * tokens
+	 */
 	public TokenManager getTokens() {
 		return tokens;
 	}
 
-	public DevelopmentCardManager getDevelopmentCards() {
+	/**
+	 * @return an object containing information about the player's
+	 * development cards
+	 */
+	public DevelopmentCardSet getDevelopmentCards() {
 		return developmentCards;
 	}
 
-	public Market getMarket() {
-		return market;
+	/**
+	 * @return an object containing information about the player's
+	 * resources.
+	 */
+	public ResourceSet getResourceSet() {
+		return resources;
 	}
 
-	public boolean hasLargestArmy() {
-
-	}
-
-	public boolean hasLongestRoad() {
-
-	}
-
-	public boolean canBuildRoad() {
-
-	}
-
-	public boolean canBuildSettlement() {
-
-	}
-
-	public boolean canBuildCity() {
-
-	}
-
-	public boolean canBuyDevelopmentCard() {
-
-	}
-
-	public boolean isOnTurn() {
-
+	/**
+	 * @return the User object associated with this Player object
+	 */
+	public User getUser() {
+		return user;
 	}
 
 }
