@@ -2,6 +2,8 @@ package john;
 
 import john.DevelopmentCardManager;
 
+/** contains information about a player's development cards
+ */
 public class DevelopmentCardSet {
 	
 	private DevelopmentCardManager yearOfPlenty;
@@ -13,6 +15,7 @@ public class DevelopmentCardSet {
 	public DevelopmentCardSet() {
 
 	}
+
 
 	public DevelopmentCardManager getYearOfPlenty() {
 		return yearOfPlenty;

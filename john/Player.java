@@ -1,5 +1,7 @@
 package john;
 
+import com.google.gson.JsonObject;
+
 import john.Game;
 import john.TokenManager;
 import john.DevelopmentCardSet;
@@ -78,6 +80,13 @@ public class Player {
 	 */
 	public User getUser() {
 		return user;
+	}
+
+	/** updates from json
+	 * @param json the json object to update the user from
+	 */
+	public void update(JsonObject json) {
+		
 	}
 
 }

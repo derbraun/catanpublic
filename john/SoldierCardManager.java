@@ -1,7 +1,5 @@
 package john;
 
-
-
 public class SoldierCardManager extends DevelopmentCardManager {
 
 	private int armySize;

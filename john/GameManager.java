@@ -6,6 +6,8 @@ import john.Game;
 import john.User;
 import john.Player;
 
+/** manages all games
+ */
 public class GameManager {
 	
 	private List<Game> games;
@@ -15,35 +17,44 @@ public class GameManager {
 
 	}
 
+	/**
+	 * @return a list of all games
+	 */
 	public List<Game> getGames() {
 		return games;
 	}
 
+	/** create game and add it to the games list
+	 */
 	public void createGame() {
 
 	}
 
+	/** remove a game from the games list
+	 * @param game the game to remove
+	 */
 	public void removeGame(Game game) {
 
 	}
 
+	/**
+	 * @return a list of all users
+	 */
 	public List<User> getUsers() {
 		return users;
 	}
 
-	public void createUser() {
+	/** add a user to the user list
+	 * @param user the user to add
+	 */
+	public void addUser(User user) {
 
 	}
 
-	public void removeUser() {
-
-	}
-
-	public void joinGame(Player player, Game game) {
-
-	}
-
-	public void leaveGame(Player player) {
+	/** remove a user from the user list
+	 * @param user the user to remove
+	 */
+	public void removeUser(User user) {
 
 	}
 
