@@ -1,5 +1,7 @@
 package john;
 
+import java.util.List;
+
 import john.DevelopmentCardManager;
 import john.Player;
 import john.Log;

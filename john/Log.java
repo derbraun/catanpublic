@@ -1,5 +1,7 @@
 package john;
 
+import java.util.List;
+
 import john.Note;
 
 public class Log {

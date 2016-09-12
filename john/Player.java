@@ -13,6 +13,7 @@ import john.User;
 public class Player {
 
 	private String color;
+	private PointManager points;
 	private TokenSet tokens;
 	private DevelopmentCardSet developmentCards;
 	private ResourceSet resources;
@@ -24,6 +25,14 @@ public class Player {
 	 */
 	public Player(User user, String color) {
 
+	}
+
+	/**
+	 * @return an object containing information on points and functions
+	 * for changing the player's points
+	 */
+	public PointManager getPoints() {
+		return points;
 	}
 
 	/**
