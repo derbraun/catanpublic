@@ -1,7 +1,5 @@
 package john;
 
-import String;
-
 import john.Player;
 import john.Game;
 
@@ -15,7 +13,7 @@ class User {
 	}
 
 	public void setName(String aName) {
-		name = aName
+		name = aName;
 	}
 
 	public String getName() {

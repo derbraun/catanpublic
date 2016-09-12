@@ -10,7 +10,7 @@ public class DevelopmentCardSet {
 	private DevelopmentCardManager monument;
 	private SoldierCardManager soldier;
 
-	public DevelopmentCardManager() {
+	public DevelopmentCardSet() {
 
 	}
 

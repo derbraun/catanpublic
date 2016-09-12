@@ -1,6 +1,6 @@
 package john;
 
-import java.utils.List;
+import java.util.List;
 
 import john.Location;
 import john.Edge;

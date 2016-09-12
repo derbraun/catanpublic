@@ -1,7 +1,5 @@
 package john;
 
-import String;
-
 import john.Player;
 
 public class Note {

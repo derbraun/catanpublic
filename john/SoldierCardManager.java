@@ -4,9 +4,9 @@ package john;
 
 public class SoldierCardManager extends DevelopmentCardManager {
 
-	private armySize;
+	private int armySize;
 
-	public addSoldierToArmy() {
+	public void addSoldierToArmy() {
 		remove();
 		armySize++;
 	}

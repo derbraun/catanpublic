@@ -1,1 +1,3 @@
+package john;
+
 class Location {}

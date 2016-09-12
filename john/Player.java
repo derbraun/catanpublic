@@ -1,7 +1,5 @@
 package john;
 
-import String;
-
 import john.Game;
 import john.TokenManager;
 import john.DevelopmentCardSet;

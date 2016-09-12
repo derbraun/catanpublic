@@ -1,6 +1,6 @@
 package john;
 
-import String;
+import java.util.List;
 
 import john.Game;
 import john.User;

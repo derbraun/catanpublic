@@ -12,7 +12,7 @@ public class ResourceSet {
 	private ResourceManager ore;
 	private Player player;
 
-	public Market() {
+	public ResourceSet() {
 
 	}
 

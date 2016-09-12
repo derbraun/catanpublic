@@ -1,7 +1,5 @@
 package john;
 
-
-
 public class DevelopmentCardManager {
 
 	protected int count;

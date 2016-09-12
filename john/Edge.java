@@ -1,6 +1,9 @@
 package john;
 
+import java.util.List;
 
+import john.Vertex;
+import john.Hex;
 
 public class Edge {
 
