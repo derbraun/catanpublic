@@ -14,19 +14,22 @@ import john.User;
  */
 public class Player {
 
+	private User user;
 	private String color;
 	private PointManager points;
 	private TokenSet tokens;
-	private DevelopmentCardSet developmentCards;
-	private ResourceSet resources;
-	private User user;
+	private List<Card> cards
 
 	/** Constructor
 	 * @param user the User object connected to this player
 	 * @param color the color the player will be represented by
 	 */
-	public Player(User user, String color) {
-
+	public Player(User aUser, String aColor) {
+		user = aUser;
+		color = aColor;
+		points = new PointManager();
+		tokens = new TokenManager();
+		cards = new ArrayList<Card>();
 	}
 
 	/**
@@ -48,7 +51,7 @@ public class Player {
 	 * @return the name of the User object associated with this Player
 	 */
 	public String getName() {
-
+		return user.getName();
 	}
 
 	/**
@@ -60,19 +63,10 @@ public class Player {
 	}
 
 	/**
-	 * @return an object containing information about the player's
-	 * development cards
+	 * @return a Collection containing the player's cards
 	 */
-	public DevelopmentCardSet getDevelopmentCards() {
-		return developmentCards;
-	}
-
-	/**
-	 * @return an object containing information about the player's
-	 * resources.
-	 */
-	public ResourceSet getResourceSet() {
-		return resources;
+	public List<Card> getCards() {
+		return cards;
 	}
 
 	/**
@@ -80,13 +74,6 @@ public class Player {
 	 */
 	public User getUser() {
 		return user;
-	}
-
-	/** updates from json
-	 * @param json the json object to update the user from
-	 */
-	public void update(JsonObject json) {
-		
 	}
 
 }

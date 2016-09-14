@@ -3,6 +3,7 @@ package john;
 public class DevelopmentCardManager {
 
 	protected int count;
+	protected boolean hasPlayableCards;
 
 	public DevelopmentCardManager() {
 		
@@ -21,6 +22,10 @@ public class DevelopmentCardManager {
 	}
 
 	public boolean canPlay() {
+
+	}
+
+	public void setHasPlayableCards() {
 
 	}
 

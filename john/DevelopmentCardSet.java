@@ -11,6 +11,7 @@ public class DevelopmentCardSet {
 	private DevelopmentCardManager roadBuilding;
 	private DevelopmentCardManager monument;
 	private SoldierCardManager soldier;
+	private boolean played;
 
 	public DevelopmentCardSet() {
 
@@ -35,6 +36,14 @@ public class DevelopmentCardSet {
 
 	public SoldierCardManager getSoldier() {
 		return soldier;
+	}
+
+	public boolean hasPlayed() {
+
+	}
+
+	public boolean canPlay() {
+
 	}
 
 }
