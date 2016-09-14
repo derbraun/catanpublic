@@ -2,7 +2,7 @@ package shared.models;
 
 /** holds information about a player's settlement, city, and road tokens
  */
-public class TokenManager {
+class TokenManager {
 
 	private int roads;
 	private int settlements;
@@ -11,7 +11,7 @@ public class TokenManager {
 	/** Constructor. Starts the player out with 15 roads, 5
 	 * settlements, and 4 cities that can be played.
 	 */
-	public TokenSet() {
+	public TokenManager() {
 		roads = 15;
 		settlements = 5;
 		cities = 4;

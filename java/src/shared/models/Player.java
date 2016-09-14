@@ -1,8 +1,5 @@
 package shared.models;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import shared.models.TokenManager;
 import shared.models.Card;
 
