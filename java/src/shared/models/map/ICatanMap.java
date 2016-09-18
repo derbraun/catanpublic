@@ -1,5 +1,6 @@
 package shared.models.map;
 
+import shared.definitions.PlayerIndex;
 import shared.definitions.PortType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -33,93 +34,98 @@ public interface ICatanMap {
 	public void placeRobber(HexLocation loc);
 	
 	/**
-	 * Checks to see if a Road can be placed on a Border at a BorderLocation
+	 * Checks to see if a Road can be placed on an Edge at a EdgeLocation
 	 * 
-	 * @param pID The id of the player
-	 * @param loc The location of the Border to build on
+	 * @param pIndex The index of the player
+	 * @param loc The location of the Edge to build on
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return boolean True = Yes, you may place. False = No
 	 */
-	public boolean canPlaceRoad(int pID, EdgeLocation loc);
+	public boolean canPlaceRoad(PlayerIndex pIndex, EdgeLocation loc);
 	
 	/**
-	 * Places a Road on a Border at BorderLocation
+	 * Places a Road on an Edge at EdgeLocation
 	 * 
-	 * @param pID The id of the player
-	 * @param loc The location of the Border to build on
+	 * @param pIndex The index of the player
+	 * @param loc The location of the Edge to build on
 	 * 
+	 * @pre pIndex != null
 	 * @pre canPlaceRoad(pID,loc) = true
 	 * 
-	 * @post Border.Road != null
-	 * @post Border.Road.PlayerID = pID
+	 * @post Edge.Road != null
+	 * @post Edge.Road.PlayerID = pID
 	 */
-	public void placeRoad(int pID, EdgeLocation loc);
+	public void placeRoad(PlayerIndex pIndex, EdgeLocation loc) 
+			throws InvalidRoadPlacementException;
 	
 	/**
-	 * Checks to see if a Settlement can be placed on a Corner at a CornerLocation
+	 * Checks to see if a Settlement can be placed on a Vertex at a VertexLocation
 	 * 
-	 * @param pID The id of the player
-	 * @param loc The location of the Corner to build on
+	 * @param pIndex The index of the player
+	 * @param loc The location of the Vertex to build on
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return boolean True = Yes, you may place. False = No
 	 */
-	public boolean canPlaceSettlement(int pID, VertexLocation loc);
+	public boolean canPlaceSettlement(PlayerIndex pIndex, VertexLocation loc);
 	
 	/**
-	 * Places a Settlement on a Corner at CornerLocation
+	 * Places a Settlement on a Vertex at VertexLocation
 	 * 
-	 * @param pID The id of the player
+	 * @param pIndex The index of the player
 	 * @param loc The location of the Corner to build on
 	 * 
+	 * @pre pIndex != null
 	 * @pre canPlaceSettlement(pID,loc) = true
 	 * 
-	 * @post Corner.Building != null
-	 * @post Corner.Building.PlayerID = pID
-	 * @post Corner.Building.isCity = false
+	 * @post Vertex.Building != null
+	 * @post Vertex.Building.PlayerID = pID
+	 * @post Vertex.Building.isCity = false
 	 */
-	public void placeSettlement(int pID, VertexLocation loc);
+	public void placeSettlement(PlayerIndex pIndex, VertexLocation loc)
+	throws InvalidBuildingPlacementException;
 	
 	/**
 	 * Checks to see if a Settlement can be upgraded to a City 
-	 * on a Corner at a CornerLocation
+	 * on a Vertex at a VertexLocation
 	 * 
-	 * @param pID The id of the player
-	 * @param loc The location of the Corner to build on
+	 * @param pIndex The index of the player
+	 * @param loc The location of the Vertex to build on
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return boolean True = Yes, you may place. False = No
 	 */
-	public boolean canUpgradeSettlement(int pID, VertexLocation loc);
+	public boolean canUpgradeSettlement(PlayerIndex pIndex, VertexLocation loc);
 	
 	/**
-	 * Upgrades a Settlement to a City on a Corner at a CornerLocation
+	 * Upgrades a Settlement to a City on a Vertex at a VertexLocation
 	 * 
 	 * @param pID The id of the player
-	 * @param loc The location of the Corner to build on
+	 * @param loc The location of the Vertex to build on
 	 * 
-	 * @pre canUpgradeSettlement(pID,loc) = true
+	 * @pre canUpgradeSettlement(pIndex,loc) = true
 	 * 
-	 * @post Corner.Building != null
-	 * @post Corner.Building.PlayerID = pID
-	 * @post Corner.Building.isCity = true
+	 * @post Vertex.Building != null
+	 * @post Vertex.Building.PlayerID = pIndex
+	 * @post Vertex.Building.isCity = true
 	 */
-	public void upgradeSettlement(int pID, VertexLocation loc);
+	public void upgradeSettlement(PlayerIndex pIndex, VertexLocation loc) 
+			throws BuildingNotUpgradableException;
 	
 	/**
 	 * Reports the longest continuous road that the player owns
 	 * 
-	 * @param pID The id of the player
+	 * @param pIndex The index of the player
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return int The highest number of consecutive roads the player has
 	 */
-	public int getLongestRoadOfPlayer(int pID);
+	public int getLongestRoadOfPlayer(PlayerIndex pIndex);
 	
 	/**
 	 * Reports the Production Results of a die roll into a passed 
@@ -137,49 +143,49 @@ public interface ICatanMap {
 	public ResProdResult getResourceProductionResults(int dieRoll);
 	
 	/**
-	 * Checks to see if a Player has a building on a harbor of a certain type
+	 * Checks to see if a Player has a building on a port of a certain type
 	 * 
-	 * @param pID The id of the player
 	 * @param type The type of the Harbor
+	 * @param pIndex The index of the player
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * @pre type != null
 	 * 
-	 * @return true if player does have a building on a harbor of that type. false otherwise
+	 * @return true if player does have a building on a port of that type. false otherwise
 	 */
-	public boolean doesPlayerHavePort(int pID, PortType type);
+	public boolean doesPlayerHavePort(PlayerIndex pIndex, PortType type);
 	
 	/**
 	 * Reports the number of roads that a player has currently on the CatanMap
 	 * 
-	 * @param pID The id of the player
+	 * @param pIndex The index of the player
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return int the total number of roads the player has placed on the map
 	 */
-	public int numRoadsOfPlayer(int pID);
+	public int numRoadsOfPlayer(PlayerIndex pIndex);
 	
 	/**
 	 * Reports the number of settlements that a player has currently on the CatanMap
 	 * 
-	 * @param pID The id of the player
+	 * @param pIndex The index of the player
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return int the total number of settlements the player has placed on the map
 	 */
-	public int numSettlementsOfPlayer(int pID);
+	public int numSettlementsOfPlayer(PlayerIndex pIndex);
 	
 	/**
 	 * Reports the number of cities that a player has currently on the CatanMap
 	 * 
-	 * @param pID The id of the player
+	 * @param pIndex The index of the player
 	 * 
-	 * @pre pID = [0-3]
+	 * @pre pIndex != null
 	 * 
 	 * @return int the total number of cities the player has placed on the map
 	 */
-	public int numCitiesOfPlayer(int pID);
+	public int numCitiesOfPlayer(PlayerIndex pIndex);
 	
 }

@@ -3,6 +3,7 @@ package shared.models.map;
 import java.util.ArrayList;
 import java.util.Map;
 
+import shared.definitions.PlayerIndex;
 import shared.definitions.PortType;
 import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
@@ -11,9 +12,9 @@ import shared.locations.VertexLocation;
 public class CatanMap implements ICatanMap {
 
 	Map<HexLocation,TerrainHex> hexes;
-	Map<Integer,Road> roads;
-	Map<Integer,Building> buildings;
-	Map<Integer,ArrayList<HexLocation>> numberTokens;
+	Map<PlayerIndex,Road> roads;
+	Map<PlayerIndex,Building> buildings;
+	Map<PlayerIndex,ArrayList<HexLocation>> numberTokens;
 	HexLocation robber;
 	
 	@Override
@@ -29,43 +30,43 @@ public class CatanMap implements ICatanMap {
 	}
 
 	@Override
-	public boolean canPlaceRoad(int pID, EdgeLocation loc) {
+	public boolean canPlaceRoad(PlayerIndex pIndex, EdgeLocation loc) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void placeRoad(int pID, EdgeLocation loc) {
+	public void placeRoad(PlayerIndex pIndex, EdgeLocation loc) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean canPlaceSettlement(int pID, VertexLocation loc) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void placeSettlement(int pID, VertexLocation loc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean canUpgradeSettlement(int pID, VertexLocation loc) {
+	public boolean canPlaceSettlement(PlayerIndex pIndex, VertexLocation loc) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void upgradeSettlement(int pID, VertexLocation loc) {
+	public void placeSettlement(PlayerIndex pIndex, VertexLocation loc) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public int getLongestRoadOfPlayer(int pID) {
+	public boolean canUpgradeSettlement(PlayerIndex pIndex, VertexLocation loc) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void upgradeSettlement(PlayerIndex pIndex, VertexLocation loc) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getLongestRoadOfPlayer(PlayerIndex pIndex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -77,25 +78,25 @@ public class CatanMap implements ICatanMap {
 	}
 
 	@Override
-	public boolean doesPlayerHavePort(int pID, PortType type) {
+	public boolean doesPlayerHavePort(PlayerIndex pIndex, PortType type) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public int numRoadsOfPlayer(int pID) {
+	public int numRoadsOfPlayer(PlayerIndex pIndex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int numSettlementsOfPlayer(int pID) {
+	public int numSettlementsOfPlayer(PlayerIndex pIndex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int numCitiesOfPlayer(int pID) {
+	public int numCitiesOfPlayer(PlayerIndex pIndex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
