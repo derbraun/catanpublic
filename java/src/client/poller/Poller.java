@@ -27,7 +27,7 @@ public class Poller
 	/**
 	 * t is simply used to set up a PollTask TimerTask.  It will also be used to cancel the timer task once the game is finished.
 	 */
-	private Timer t;//will be created in the poller constructor; scheduleAtFixedRate will be performed on t using PollTask TimerTask in constructor, as well
+	private Timer timer;//will be created in the poller constructor; scheduleAtFixedRate will be performed on t using PollTask TimerTask in constructor, as well
 	
 	
 	/**
@@ -70,7 +70,7 @@ public class Poller
 	 * @pre The timer must have been initialized (which is implicit given the construction of this Poller object).
 	 * @post The Poller no longer checks for updates.
 	 */
-	public void cancelTimer()//Discards PollTask from Timer t
+	public void cancelTimer()//Discards PollTask from Timer timer
 	{
 	}
 	

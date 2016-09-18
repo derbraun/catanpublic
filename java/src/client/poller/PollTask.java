@@ -26,7 +26,7 @@ public class PollTask extends TimerTask{
 	}
 	
 	/**
-	 * Method which is required by the TimerTask abstract class.  This is what gets executed at fixed intervals defined by the Timer t in the Poller.
+	 * Method which is required by the TimerTask abstract class.  This is what gets executed at fixed intervals defined by the Timer timer in the Poller.
 	 * @pre None
 	 * @post The PollTask will receive one of two results from the server proxy/server: 1) No changes have been made, or 2) a JSONObject congruent with the pattern defined by the server.
 	 * If it receives the later, the PollTask will send the JSONObject to the controller via the Poller
