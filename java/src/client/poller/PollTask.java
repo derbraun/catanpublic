@@ -35,30 +35,5 @@ public class PollTask extends TimerTask{
 	{
 		
 	}
-	
-	/**
-	 * The PollTask requests (via the Poller) the current model version from the controller.  This number is used to create the update object which the server proxy uses to talk to 
-	 * the server.
-	 * @pre The PollTask must have a reference to a functional Poller, and the Poller must have a reference to a functional controller (implicit in the construction of the PollTask and
-	 *  Poller objects).
-	 * @post the PollTask will have the most current version number to pass to the server proxy (via the updateObject).
-	 * @return the most current model version number, as defined by the controller.
-	 */
-	private int getModelVersion()//calls same method on poller, which then talks to controller
-	{
-		//TODO: Need to check if the model version will just be an int
-	}
-	
-	/**
-	 * The PollTask requests (via the Poller) the ID of the player whose turn it currently is.  This number is used to create the update object which the server proxy uses to talk to 
-	 * the server.
-	 * @pre The PollTask must have a reference to a functional Poller, and the Poller must have a reference to a functional controller (implicit in the construction of the PollTask and
-	 *  Poller objects).
-	 * @post the PollTask will have the ID of the player whose turn it currently is, to pass to the server proxy (via the updateObject).
-	 * @return the ID of the player whose turn it currently is.
-	 */
-	private catan.java.src.shared.definitions.PlayerIndex getCurrentPlayer()//gets player index to be included in update object; for validation
-	{
-	}
 
 }
