@@ -11,7 +11,7 @@ import shared.models.exceptions.JsonStructureException;
  * sequences of 'note' objects which contain a player and text content
  * to be displayed.
  */
-class Log implements Iterable<Note> {
+public class Log implements Iterable<Note> {
 
 	private List<Note> notes;
 

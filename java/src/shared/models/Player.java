@@ -10,7 +10,7 @@ import shared.models.exceptions.NegativeGameComponentsException;
  * multiple games at a time; a Player represents an instance of a single user
  * playing a single game.
  */
-class Player {
+public class Player {
 
 	private String name;
 	private String color;

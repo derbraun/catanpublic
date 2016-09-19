@@ -5,7 +5,7 @@ import shared.models.exceptions.NegativeGameComponentsException;
 /**
  * Holds information about a player's settlement, city, and road tokens
  */
-class TokenManager {
+public class TokenManager {
 
 	private TokenType roads;
 	private TokenType settlements;

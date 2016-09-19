@@ -6,7 +6,7 @@ import shared.models.exceptions.NegativeGameComponentsException;
  * Contains information on the number of a certain type of token a
  * player has.
  */
-class TokenType {
+public class TokenType {
 
 	private int remaining;
 

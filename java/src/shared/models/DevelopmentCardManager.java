@@ -3,7 +3,7 @@ package shared.models;
 /**
  * Class for managing a player's development cards
  */
-class DevelopmentCardManager {
+public class DevelopmentCardManager {
 
 	private DevelopmentCardType yearOfPlenty;
 	private DevelopmentCardType monopoly;

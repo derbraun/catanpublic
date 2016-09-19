@@ -5,7 +5,7 @@ import shared.models.exceptions.NegativeGameComponentsException;
 /**
  * Class for managing a player's resources.
  */
-class ResourceManager {
+public class ResourceManager {
 
 	private ResourceType bricks;
 	private ResourceType wood;

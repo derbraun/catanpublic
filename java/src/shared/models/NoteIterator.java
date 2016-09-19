@@ -11,7 +11,7 @@ import java.util.Iterator;
  * supported, because there shouldn't be any reason for a Log to remove
  * a note once it has been added.
  */
-class NoteIterator implements Iterator<Note> {
+public class NoteIterator implements Iterator<Note> {
 
 	public boolean hasNext() {
             return true;

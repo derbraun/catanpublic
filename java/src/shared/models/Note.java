@@ -8,7 +8,7 @@ import shared.models.exceptions.JsonStructureException;
  * contains data on which player the move/comment is associated with and
  * what the actual text content of the note is.
  */
-class Note {
+public class Note {
 
 	final private Player player;
 	final private String content;
