@@ -6,7 +6,9 @@
 package shared.models.exceptions;
 
 /**
- *
+ * Thrown when the JsonObject being processed does not have the
+ * expected structure.
+ * 
  * @author John Larson
  */
 public class JsonStructureException extends Exception {

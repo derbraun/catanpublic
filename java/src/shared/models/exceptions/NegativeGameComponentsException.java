@@ -6,7 +6,10 @@
 package shared.models.exceptions;
 
 /**
- *
+ * It's impossible to have negative tokens or cards, so this Exception
+ * is thrown whenever an operation would result in a negative number of
+ * those things.
+ * 
  * @author John Larson
  */
 public class NegativeGameComponentsException extends Exception {

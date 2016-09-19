@@ -6,7 +6,9 @@
 package shared.models.exceptions;
 
 /**
- *
+ * Thrown when a String which is supposed to represent a color cannot
+ * be interpreted as a hexadecimal color.
+ * 
  * @author John Larson
  */
 public class ColorParseException extends Exception {
