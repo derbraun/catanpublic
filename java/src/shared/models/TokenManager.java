@@ -1,83 +1,52 @@
 package shared.models;
 
-/** holds information about a player's settlement, city, and road tokens
+import shared.models.exceptions.NegativeGameComponentsException;
+
+/**
+ * Holds information about a player's settlement, city, and road tokens
  */
 class TokenManager {
 
-	private int roads;
-	private int settlements;
-	private int cities;
+	private TokenType roads;
+	private TokenType settlements;
+	private TokenType cities;
 
-	/** Constructor. Starts the player out with 15 roads, 5
-	 * settlements, and 4 cities that can be played.
+	/**
+	 * Constructor. Initializes the TokenManager with the given number
+	 * of each kind of token.
+	 * 
+	 * @param numRoads the number of roads the player should have left.
+	 * Must be a non-negative integer.
+	 * @param numSettlements the number of settlements the player should
+	 * have left. Must be a non-negative integer.
+	 * @param numCities the number of cities the player should have
+	 * left. Must be a non-negative integer.
+	 * @throws NegativeGameComponentsException if any of the parameters
+	 * are negative.
 	 */
-	public TokenManager() {
-		roads = 15;
-		settlements = 5;
-		cities = 4;
+	public TokenManager(int numRoads, int numSettlements, int numCities) 
+			throws NegativeGameComponentsException {
+
 	}
 
 	/**
-	 * @return the number of roads the user has left
+	 * Constructor. Initializes the TokenManager for the beginning of a
+	 * game.
 	 */
-	public int getRoadsLeft() {
+	public TokenManager() throws NegativeGameComponentsException {
+		this(15, 5, 4);
+	}
+
+	public TokenType getRoads() {
 		return roads;
 	}
 
-	/** remove one road from the player's unused roads
-	 */
-	public void removeRoad() {
-		roads--;
-	}
-
-	/**
-	 * @return true if the player still has unused roads, otherwise
-	 * false
-	 */
-	public boolean hasRoadsLeft() {
-		return roads != 0;
-	}
-
-	/**
-	 * @return the number of settlements the user has left
-	 */
-	public int getSettlementsLeft() {
+	public TokenType getSettlements() {
 		return settlements;
 	}
 
-	/** remove one settlement from the player's unused settlements
-	 */
-	public void removeSettlement() {
-		settlements--;
-	}
-
-	/**
-	 * @return true if the player still has unused settlements,
-	 * otherwise false
-	 */
-	public boolean hasSettlementsLeft() {
-		return settlements != 0;
-	}
-
-	/**
-	 * @return the number of cities the user has left
-	 */
-	public int getCitiesLeft() {
+	public TokenType getCities() {
 		return cities;
-	}
-
-	/** remove one city from the player's unused cities
-	 */
-	public void removeCity() {
-		cities--;
-	}
-
-	/**
-	 * @return true if the player still has unused cities, otherwise
-	 * false
-	 */
-	public boolean hasCitiesLeft() {
-		return roads != 0;
 	}
 
 }
