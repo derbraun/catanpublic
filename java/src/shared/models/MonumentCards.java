@@ -33,6 +33,7 @@ public class MonumentCards extends DevelopmentCardType {
 	 * @return true if the player has at least one Monument card, false
 	 * otherwise.
 	 */
+	@Override
 	public boolean canPlay() {
 		return numLeft() >= 1;
 	}
