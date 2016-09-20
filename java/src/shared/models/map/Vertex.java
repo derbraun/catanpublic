@@ -8,6 +8,13 @@ import shared.definitions.PortType;
 import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
 
+/**
+ * Represents a Vertex on the Settlers of Catan Map
+ * There can be one to three VertexLocations that point to the same vertex
+ * A Vertex may have one Building placed on top of it
+ * @author Cory
+ *
+ */
 public class Vertex {
 
 	/**
