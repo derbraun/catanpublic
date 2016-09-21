@@ -1,13 +1,12 @@
-package catan.java.src.client.poller;
+package client.poller;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import org.json.JSONObject;
 
 /**
- * 
- * @author Danny
- *The poller class is used as a facade between the program and the PollTask TimerTask.  
+ * The poller polls the server at regular intervals, and it runs independent of other code.
+ * Poller implementation may use java.util.Timer or java.util.TimerTask
  */
 
 public class Poller 

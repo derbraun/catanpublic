@@ -1,11 +1,9 @@
-package catan.java.src.client.poller;
+package client.poller;
 import org.json.JSONObject;
 
 import java.util.TimerTask;
 /**
- * 
- * @author Danny
- *This class performs the actions of requesting a new model from the server and sending updated information to the controller.
+ *This class performs the actions of requesting a new model from the server and sending updated information to the game object.
  */
 public class PollTask extends TimerTask{
 	
