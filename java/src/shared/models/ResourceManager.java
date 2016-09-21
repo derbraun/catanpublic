@@ -37,8 +37,8 @@ public class ResourceManager {
 	/**
 	 * Constructor. Initializes ResourceManager for start of game.
 	 */
-	public ResourceManager() throws NegativeGameComponentsException {
-		this(0, 0, 0, 0, 0);
+	public ResourceManager() {
+		
 	}
 
 	public ResourceType getBricks() {
