@@ -13,7 +13,7 @@ import shared.definitions.ResourceType;
  *
  * @author daniel
  */
-public class BuildCard extends Cards {
+public class BuildCard extends Card {
     
     private ArrayList<ResourceType> roadCost;
     private ArrayList<ResourceType> settleCost;

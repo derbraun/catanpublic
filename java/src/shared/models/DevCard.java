@@ -9,7 +9,7 @@ package shared.models;
  *
  * @author daniel
  */
-public abstract class DevCard extends Cards{
+public abstract class DevCard extends Card{
     /**
      * Default constructor
      * drawable is set to true
