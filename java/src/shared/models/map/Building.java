@@ -9,7 +9,7 @@ import shared.locations.VertexLocation;
  * @author Cory
  *
  */
-public class Building {
+public abstract class Building {
 
 	/**
 	 * Where the building is located
@@ -55,11 +55,14 @@ public class Building {
 	}
 
 	/**
+	 * @return true if the building is a settlement, false if it's a city
+	 */
+	public abstract boolean isSettlement();
+	
+	/**
 	 * @return false if the building is a settlement, true if it's a city
 	 */
-	public boolean isUpgraded() {
-		return isUpgraded;
-	}
+	public abstract boolean isCity();
 
 	/**
 	 * Upgrade the building to be a city

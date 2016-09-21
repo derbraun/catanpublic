@@ -1,4 +1,4 @@
-package shared;
+package shared.exceptions;
 
 @SuppressWarnings("serial")
 public class ClientServerException

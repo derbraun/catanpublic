@@ -1,8 +1,10 @@
-package client;
+package communicators;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
+
+import shared.exceptions.ClientException;
 import shared.inputObjects.InputObject;
 import shared.outputObjects.OutputObject;
 

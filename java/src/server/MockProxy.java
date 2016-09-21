@@ -1,15 +1,25 @@
-package shared;
+package server;
 
-import shared.outputObjects.*;
-import client.ClientException;
+import server.IServer;
+import shared.exceptions.ClientException;
 import shared.inputObjects.*;
+import shared.outputObjects.*;
 
 /**
- * The server interface
- * @author Dell
- *
+ * The mock server proxy on the client side
  */
-public interface IServer {
+public class MockProxy implements IServer {
+
+	public static MockProxy SINGLETON = new MockProxy();
+	
+	/**
+	 * Creates an instance of the mock server proxy
+	 * @pre None
+	 * @post A MockProxy object
+	 */
+	private MockProxy() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Logins the user from the input provided. Verifies that the user exists
@@ -24,8 +34,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The HTTP Response will set a cookie with the values of the player's username, password and ID<br/>
 	 * 		 If invalid, the server returns an HTTP 400 error response
 	 */
-	public LoginUserOutput LoginUser(LoginUserInput input) throws ClientException;
-	
+	@Override
+	public LoginUserOutput LoginUser(LoginUserInput input) throws ClientException {
+		
+		return new LoginUserOutput();
+	}
+
 	/**
 	 * Creates a new user account and logs the user in to the server
 	 * @param input An object containing the RegisterUser input parameters
@@ -41,8 +55,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;3. The HTTP Response will set a cookie with the values of the player's username, password and ID<br/>
 	 * 		 If invalid, the server returns an HTTP 400 error response
 	 */
-	public RegisterUserOutput RegisterUser(RegisterUserInput input) throws ClientException;
-	
+	@Override
+	public RegisterUserOutput RegisterUser(RegisterUserInput input) throws ClientException {
+		
+		return new RegisterUserOutput();
+	}
+
 	/**
 	 * Gets a list of all the current games running on the server
 	 * @return An object containing the CurrentGames output parameters
@@ -53,8 +71,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The body of the response will contain a JSON object that contains the information on each current game<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public CurrentGamesOutput GetCurrentListOfGames() throws ClientException;
-	
+	@Override
+	public CurrentGamesOutput GetCurrentListOfGames() throws ClientException {
+		
+		return new CurrentGamesOutput();
+	}
+
 	/**
 	 * Creates a new game on the server
 	 * @param input An object containing the CreateGame input parameters
@@ -69,8 +91,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;3. The body of the response will contain a JSON object describing the created game<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public CreateGameOutput CreateGame(CreateGameInput input) throws ClientException;
-	
+	@Override
+	public CreateGameOutput CreateGame(CreateGameInput input) throws ClientException {
+		
+		return new CreateGameOutput();
+	}
+
 	/**
 	 * Adds the player to the specified game
 	 * @param input An object containing the JoinGame input parameters
@@ -87,8 +113,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;3. The catan game cookie is updated<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public JoinGameOutput JoinGame(JoinGameInput input) throws ClientException;
-	
+	@Override
+	public JoinGameOutput JoinGame(JoinGameInput input) throws ClientException {
+		
+		return new JoinGameOutput();
+	}
+
 	/**
 	 * Save the current state of the game to a file and include a bug report. This file can be used later to restore the game to the saved state
 	 * @param input An object containing the SaveGame input parameters
@@ -102,8 +132,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The current state of the game is saved to the server's file system<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public SaveGameOutput SaveGame(SaveGameInput input) throws ClientException;
-	
+	@Override
+	public SaveGameOutput SaveGame(SaveGameInput input) throws ClientException {
+		
+		return new SaveGameOutput();
+	}
+
 	/**
 	 * Previously saved states of the game can be loaded from the server's file system
 	 * @param input An object containing the LoadGame input parameters
@@ -115,8 +149,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The saved game will now have been loaded with its state restored<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public LoadGameOutput LoadGame(LoadGameInput input) throws ClientException;
-	
+	@Override
+	public LoadGameOutput LoadGame(LoadGameInput input) throws ClientException {
+		
+		return new LoadGameOutput();
+	}
+
 	/**
 	 * Returns the current state of the game in a JSON object. If a version number is included, the state will only be returned if there is a newer version. If it needs no update, it will be indicated in the output parameters
 	 * @param input An object containing the UpdateCurrentGameState input parameters
@@ -131,8 +169,13 @@ public interface IServer {
 	 * 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. "true" is returned if a version number was included and matched the version of the model on the server<br/>
 	 *		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public UpdateCurrentGameStateOutput UpdateCurrentGameState(UpdateCurrentGameStateInput input) throws ClientException;
-	
+	@Override
+	public UpdateCurrentGameStateOutput UpdateCurrentGameState(UpdateCurrentGameStateInput input)
+			throws ClientException {
+		
+		return null;// new UpdateCurrentGameStateOutput(null);
+	}
+
 	/**
 	 * Resets the game to its original state and clears out the command history for the game
 	 * If a server-created game is reset, the game returns to its state just after the initial placement round, otherwise (if its a player-created game) the game is reset to before the initial placement round.
@@ -148,8 +191,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;4. The game's updated client model JSON object will be in the response<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public ResetGameOutput ResetGame(ResetGameInput input) throws ClientException;
-	
+	@Override
+	public ResetGameOutput ResetGame(ResetGameInput input) throws ClientException {
+		
+		return new ResetGameOutput();
+	}
+
 	/**
 	 * Gets a list of the commands that have been executed in the current game, this allows the user to later re-execute these commands for testing
 	 * @return An object containing the GetCommandsForGame output parameters
@@ -160,8 +207,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The response will contain a JSON object that has the list of commands that were executed<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public GetCommandsForGameOutput GetCommandsForGame() throws ClientException;
-	
+	@Override
+	public GetCommandsForGameOutput GetCommandsForGame() throws ClientException {
+		
+		return new GetCommandsForGameOutput();
+	}
+
 	/**
 	 * Executes the specified list of commands for the current game. A new JSON object for the game model will be returned containing the changes
 	 * @param input An object containing the SetCommandsForGame input parameters
@@ -174,8 +225,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;3. The response will contain the updated model JSON object<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public SetCommandsForGameOutput SetCommandsForGame(SetCommandsForGameInput input) throws ClientException;
-	
+	@Override
+	public SetCommandsForGameOutput SetCommandsForGame(SetCommandsForGameInput input) throws ClientException {
+		
+		return new SetCommandsForGameOutput();
+	}
+
 	/**
 	 * Gets a list of all supported AI player types (only LARGEST_ARMY is supported)
 	 * @return An object containing the AITypes output parameters
@@ -186,8 +241,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The response contains the list of AI types in a JSON object<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public AITypesOutput GetAITypes() throws ClientException;
-	
+	@Override
+	public AITypesOutput GetAITypes() throws ClientException {
+		
+		return new AITypesOutput();
+	}
+
 	/**
 	 * Adds an AI player to the current game
 	 * @param input An object containing the AddAIPlayer input parameters
@@ -201,8 +260,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. An AI player will have been added to the current game<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public AddAIPlayerOutput AddAIPlayer(AddAIPlayerInput input) throws ClientException;
-	
+	@Override
+	public AddAIPlayerOutput AddAIPlayer(AddAIPlayerInput input) throws ClientException {
+		
+		return new AddAIPlayerOutput();
+	}
+
 	/**
 	 * Sets the server's logging level
 	 * @param input An object containing the ServerLogLevel input parameters
@@ -214,8 +277,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;2. The server will now be using the specified logging level<br/>
 	 * 		 If unsuccessful, the server returns an HTTP 400 error response
 	 */
-	public ServerLogLevelOutput SetServerLogLevel(ServerLogLevelInput input) throws ClientException;
-	
+	@Override
+	public ServerLogLevelOutput SetServerLogLevel(ServerLogLevelInput input) throws ClientException {
+		
+		return new ServerLogLevelOutput();
+	}
+
 	/**
 	 * Sends a specified message to the chat
 	 * @param input An object containing the SendChat input parameters
@@ -224,8 +291,12 @@ public interface IServer {
 	 * @pre The caller has already logged in to the server and joined a game
 	 * @post The chat contains the specified message at the end
 	 */
-	public SendChatOutput SendChat(SendChatInput input) throws ClientException;
-	
+	@Override
+	public SendChatOutput SendChat(SendChatInput input) throws ClientException {
+		
+		return new SendChatOutput();
+	}
+
 	/**
 	 * Decides if the player accepts the trade
 	 * @param input An object containing the AcceptTrade input parameters
@@ -238,8 +309,12 @@ public interface IServer {
 	 * 		 2. If you declined the trade, no resources are exchanged<br/>
 	 * 		 3. The trade offer is removed
 	 */
-	public AcceptTradeOutput AcceptTrade(AcceptTradeInput input) throws ClientException;
-	
+	@Override
+	public AcceptTradeOutput AcceptTrade(AcceptTradeInput input) throws ClientException {
+		
+		return new AcceptTradeOutput();
+	}
+
 	/**
 	 * The specified cards will be discarded from the player
 	 * @param input An object containing the DiscardCards input parameters
@@ -252,8 +327,12 @@ public interface IServer {
 	 * @post 1. You gave up the specified resources<br/>
 	 * 		 2. If you are the last one to discard, the client model status changes to "Robbing"
 	 */
-	public DiscardCardsOutput DiscardCards(DiscardCardsInput input) throws ClientException;
-	
+	@Override
+	public DiscardCardsOutput DiscardCards(DiscardCardsInput input) throws ClientException {
+		
+		return new DiscardCardsOutput();
+	}
+
 	/**
 	 * Rolls a pair of "dice" to return a random number between 2 and 12
 	 * @param input An object containing the RollDice input parameters
@@ -264,8 +343,12 @@ public interface IServer {
 	 * 		3. The client model's status is "Rolling"
 	 * @post The client model's status is now in "Discarding", "Robbing" or "Playing"
 	 */
-	public RollDiceOutput RollDice(RollDiceInput input) throws ClientException;
-	
+	@Override
+	public RollDiceOutput RollDice(RollDiceInput input) throws ClientException {
+		
+		return new RollDiceOutput();
+	}
+
 	/**
 	 * Builds a road on the specified location
 	 * @param input An object containing the BuildRoad input parameters
@@ -283,8 +366,12 @@ public interface IServer {
 	 * 		 2. The road is on the map at the specified location<br/>
 	 * 		 3. If applicable, "longest road" is awarded to the player with the longest road
 	 */
-	public BuildRoadOutput BuildRoad(BuildRoadInput input) throws ClientException;
-	
+	@Override
+	public BuildRoadOutput BuildRoad(BuildRoadInput input) throws ClientException {
+		
+		return new BuildRoadOutput();
+	}
+
 	/**
 	 * Builds a settlement on the specified location
 	 * @param input An object containing the BuildSettlement input parameters
@@ -301,8 +388,12 @@ public interface IServer {
 	 * @post 1. You lost the resources required to build a settlement (1 wood, 1 brick, 1 wheat, 1 sheep, 1 settlement)<br/>
 	 * 		 2. The settlement is on the map at the specified location
 	 */
-	public BuildSettlementOutput BuildSettlement(BuildSettlementInput input) throws ClientException;
-	
+	@Override
+	public BuildSettlementOutput BuildSettlement(BuildSettlementInput input) throws ClientException {
+		
+		return new BuildSettlementOutput();
+	}
+
 	/**
 	 * Builds a city on the specified location
 	 * @param input An object containing the BuildCity input parameters
@@ -317,8 +408,12 @@ public interface IServer {
 	 * 		 2. The city is on the map at the specified location<br/>
 	 * 		 3. You got a settlement back
 	 */
-	public BuildCityOutput BuildCity(BuildCityInput input) throws ClientException;
-	
+	@Override
+	public BuildCityOutput BuildCity(BuildCityInput input) throws ClientException {
+		
+		return new BuildCityOutput();
+	}
+
 	/**
 	 * A player offers a trade with another player
 	 * @param input An object containing the OfferTrade input parameters
@@ -330,8 +425,12 @@ public interface IServer {
 	 * 		4. You have the resources you are offering
 	 * @post The trade is offered to the other player
 	 */
-	public OfferTradeOutput OfferTrade(OfferTradeInput input) throws ClientException;
-	
+	@Override
+	public OfferTradeOutput OfferTrade(OfferTradeInput input) throws ClientException {
+		
+		return new OfferTradeOutput();
+	}
+
 	/**
 	 * A player offers a trade to one of the ports
 	 * @param input An object containing the MaritimeTrade input parameters
@@ -344,8 +443,12 @@ public interface IServer {
 	 * 		5. For ratios less than 4, you have the correct port for the trade
 	 * @post The trade has been executed (the offered resources are in the bank and the requested resource has been received)
 	 */
-	public MaritimeTradeOutput MaritimeTrade(MaritimeTradeInput input) throws ClientException;
-	
+	@Override
+	public MaritimeTradeOutput MaritimeTrade(MaritimeTradeInput input) throws ClientException {
+		
+		return new MaritimeTradeOutput();
+	}
+
 	/**
 	 * The robber is moved to a new location and resources are stolen from a nearby player
 	 * @param input An object containing the RobPlayer input parameters
@@ -359,8 +462,12 @@ public interface IServer {
 	 * @post 1. The robber is in the new location<br/>
 	 * 		 2. The player being robbed (if any) gave you one of his resource cards (randomly selected)
 	 */
-	public RobPlayerOutput RobPlayer(RobPlayerInput input) throws ClientException;
-	
+	@Override
+	public RobPlayerOutput RobPlayer(RobPlayerInput input) throws ClientException {
+		
+		return new RobPlayerOutput();
+	}
+
 	/**
 	 * Finishes a player's turn
 	 * @param input An object containing the FinishTurn input parameters
@@ -372,8 +479,12 @@ public interface IServer {
 	 * @post 1. The cards in your new dev card hand have been transferred to your old dev card hand<br/>
 	 * 		 2. It is the next player's turn
 	 */
-	public FinishTurnOutput FinishTurn(FinishTurnInput input) throws ClientException;
-	
+	@Override
+	public FinishTurnOutput FinishTurn(FinishTurnInput input) throws ClientException {
+		
+		return new FinishTurnOutput();
+	}
+
 	/**
 	 * Gives a development card to the player
 	 * @param input An object containing the BuyDevCard input parameters
@@ -388,8 +499,12 @@ public interface IServer {
 	 * 			&nbsp;&nbsp;&nbsp;- If it is a monument card, it has been added to your old dev card hand<br/>
 	 * 			&nbsp;&nbsp;&nbsp;- If it is a non-monument card, it has been added to your new dev card hand (unplayable this turn)
 	 */
-	public BuyDevCardOutput BuyDevCard(BuyDevCardInput input) throws ClientException;
-	
+	@Override
+	public BuyDevCardOutput BuyDevCard(BuyDevCardInput input) throws ClientException {
+		
+		return new BuyDevCardOutput();
+	}
+
 	/**
 	 * A player plays a soldier card
 	 * @param input An object containing the PlaySoldierCard input parameters
@@ -407,8 +522,12 @@ public interface IServer {
 	 * 		 3. If applicable, "largest army" has been awarded to the player who has played the most soldier cards<br/>
 	 * 		 4. You are not allowed to play other development cards during this turn (except for monument cards)
 	 */
-	public PlaySoldierCardOutput PlaySoldierCard(PlaySoldierCardInput input) throws ClientException;
-	
+	@Override
+	public PlaySoldierCardOutput PlaySoldierCard(PlaySoldierCardInput input) throws ClientException {
+		
+		return new PlaySoldierCardOutput();
+	}
+
 	/**
 	 * A player plays a year of plenty card
 	 * @param input An object containing the PlayYearOfPlentyCard input parameters
@@ -422,8 +541,12 @@ public interface IServer {
 	 * 		6. The two specified resources are in the bank
 	 * @post You gained the two specified resources
 	 */
-	public PlayYearOfPlentyCardOutput PlayYearOfPlentyCard(PlayYearOfPlentyCardInput input) throws ClientException;
-	
+	@Override
+	public PlayYearOfPlentyCardOutput PlayYearOfPlentyCard(PlayYearOfPlentyCardInput input) throws ClientException {
+		
+		return new PlayYearOfPlentyCardOutput();
+	}
+
 	/**
 	 * A player plays a road building card
 	 * @param input An object containing the PlayRoadBuildingCard input parameters
@@ -442,8 +565,12 @@ public interface IServer {
 	 * 		 2. Two new roads appear on the map at the specified locations<br/>
 	 * 		 3. If applicable, "longest road" has been awarded to the player with the longest road
 	 */
-	public PlayRoadBuildingCardOutput PlayRoadBuildingCard(PlayRoadBuildingCardInput input) throws ClientException;
-	
+	@Override
+	public PlayRoadBuildingCardOutput PlayRoadBuildingCard(PlayRoadBuildingCardInput input) throws ClientException {
+		
+		return new PlayRoadBuildingCardOutput();
+	}
+
 	/**
 	 * A player plays a monopoly card
 	 * @param input An object containing the PlayMonopolyCard input parameters
@@ -456,8 +583,12 @@ public interface IServer {
 	 * 		5. You have not yet played a non-monument dev card this turn
 	 * @post All of the other players have given you all of their resource cards of the specified type
 	 */
-	public PlayMonopolyCardOutput PlayMonopolyCard(PlayMonopolyCardInput input) throws ClientException;
-	
+	@Override
+	public PlayMonopolyCardOutput PlayMonopolyCard(PlayMonopolyCardInput input) throws ClientException {
+		
+		return new PlayMonopolyCardOutput();
+	}
+
 	/**
 	 * A player plays a monument card
 	 * @param input An object containing the PlayMonumentCard input parameters
@@ -471,5 +602,9 @@ public interface IServer {
 	 * 		6. You have enough monument cards to win the game (to reach 10 victory points)
 	 * @post You gained a victory point
 	 */
-	public PlayMonumentCardOutput PlayMonumentCard(PlayMonumentCardInput input) throws ClientException;
+	@Override
+	public PlayMonumentCardOutput PlayMonumentCard(PlayMonumentCardInput input) throws ClientException {
+		
+		return new PlayMonumentCardOutput();
+	}
 }

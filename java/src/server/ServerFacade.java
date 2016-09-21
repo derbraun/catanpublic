@@ -1,7 +1,7 @@
 package server;
 
-import client.ClientException;
-import shared.IServer;
+import shared.exceptions.ClientException;
+import server.IServer;
 import shared.inputObjects.*;
 import shared.outputObjects.*;
 

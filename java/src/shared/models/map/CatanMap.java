@@ -9,12 +9,22 @@ import shared.locations.EdgeLocation;
 import shared.locations.HexLocation;
 import shared.locations.VertexLocation;
 
+/**
+ * The default Catan Map that is made up of Hexes, Edges, Vertices, and Ports.
+ * Certain Game pieces may be placed on the map including buildings, roads, 1 robber, and number tokens.
+ * 
+ */
 public class CatanMap implements ICatanMap {
 
+	/** The Hexes of the Map keyed to Hex Locations */
 	Map<HexLocation,TerrainHex> hexes;
-	Map<PlayerIndex,Road> roads;
+	/** The Roads currently on the map that the player of player index owns */
+	Map<PlayerIndex,ArrayList<Road>> roads;
+	/** The Buildings currently on the map that the player of player index owns */
 	Map<PlayerIndex,Building> buildings;
+	/** The Hex location of each number token */
 	Map<PlayerIndex,ArrayList<HexLocation>> numberTokens;
+	/** The Hex location of the Robber on the map */
 	HexLocation robber;
 	
 	@Override

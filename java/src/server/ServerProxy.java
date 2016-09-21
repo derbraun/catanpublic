@@ -1,6 +1,8 @@
-package client;
+package server;
 
-import shared.IServer;
+import communicators.ClientCommunicator;
+import server.IServer;
+import shared.exceptions.ClientException;
 import shared.inputObjects.*;
 import shared.outputObjects.*;
 

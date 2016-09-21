@@ -1,6 +1,6 @@
-package client;
+package shared.exceptions;
 
-import shared.ClientServerException;
+import shared.exceptions.ClientServerException;
 
 @SuppressWarnings("serial")
 public class ClientException
