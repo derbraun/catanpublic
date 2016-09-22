@@ -5,8 +5,8 @@ import java.util.TimerTask;
 import org.json.JSONObject;
 
 /**
- * The poller polls the server at regular intervals, and it runs independent of other code.
- * Poller implementation may use java.util.Timer or java.util.TimerTask
+ * The Poller checks the server for updates to the model at regular intervals, running independent of other code.
+ * Implementation of the Poller may use java.util.Timer or java.util.TimerTask
  */
 
 public class Poller 
