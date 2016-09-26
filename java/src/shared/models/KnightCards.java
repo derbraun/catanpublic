@@ -45,7 +45,8 @@ public class KnightCards extends DevelopmentCardType {
 	 * knight to play.
 	 */
 	public void moveKnightToArmy() {
-
+		remaining--;
+		armySize++;
 	}
 
 }

@@ -24,15 +24,18 @@ public class DevelopmentCardManager {
 	 * Constructor. Initializes the DevelopmentCardManager with the
 	 * given DevelopmentCardType objects.
 	 * 
+	 * @param aPlayed whether or not the player has played a development
+	 * card this turn.
 	 * @param aYearOfPlenty the Year of Plenty Cards object.
 	 * @param aMonopoly the Monopoly Cards object.
 	 * @param aRoadBuilding the Road Building Cards object.
 	 * @param aMonuments the Monument Cards object
 	 * @param aKnights the Knight Cards object.
 	 */
-	public DevelopmentCardManager(DevelopmentCardType aYearOfPlenty,
+	public DevelopmentCardManager(boolean aPlayed,
+			DevelopmentCardType aYearOfPlenty,
 			DevelopmentCardType aMonopoly,
-                        DevelopmentCardType aRoadBuilding,
+            DevelopmentCardType aRoadBuilding,
 			MonumentCards aMonuments, KnightCards aKnights) {
 
 	}

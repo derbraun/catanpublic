@@ -23,7 +23,8 @@ public class DevelopmentCardType {
 	 * @throws NegativeGameComponentsException if amount is negative.
 	 */
 	public DevelopmentCardType(int amount, boolean isPlayable) throws NegativeGameComponentsException {
-
+		remaining = amount;
+		playable = isPlayable;
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class DevelopmentCardType {
 	 * turn, false otherwise.
 	 */
 	public boolean canPlay() {
-            return true;
+            return playable && remaining > 0;
 	}
 
 	/**
@@ -52,7 +53,7 @@ public class DevelopmentCardType {
 	 * @post The player has one more of this type of card than before.
 	 */
 	public void draw() {
-
+		remaining++;
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class DevelopmentCardType {
 	 * card to discard.
 	 */
 	public void discard() throws NegativeGameComponentsException {
-
+		remaining--;
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class DevelopmentCardType {
 	 * this card type is marked as playable.
 	 */
 	public void reset() {
-
+		playable = remaining > 0;
 	}
 
 }
