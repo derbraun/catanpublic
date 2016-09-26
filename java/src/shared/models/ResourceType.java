@@ -19,6 +19,7 @@ public class ResourceType {
 	 * @throws NegativeGameComponentsException if amount is negative.
 	 */
 	public ResourceType(int amount)throws NegativeGameComponentsException {
+		if(amount < 0) throw new NegativeGameComponentsException();
 		remaining = amount;
 	}
 
@@ -41,7 +42,8 @@ public class ResourceType {
 	 * @throws NegativeGameComponentsException if amount is negative.
 	 */
 	 public void draw(int amount) throws NegativeGameComponentsException {
-	 	remaining += amount;
+	 	if(amount < 0) throw new NegativeGameComponentsException();
+		remaining += amount;
 	 }
 
 	 /**
@@ -57,7 +59,10 @@ public class ResourceType {
 	  * player has less than amount of this resource.
 	  */
 	 public void discard(int amount) throws NegativeGameComponentsException {
-	 	remaining -= amount;
+	 	if(amount < 0 || amount > remaining) {
+			throw new NegativeGameComponentsException();
+		}
+		remaining -= amount;
 	 }
 
 }

@@ -19,7 +19,8 @@ public class TokenType {
 	 * @throws NegativeGameComponentsException if amount is negative.
 	 */
 	public TokenType(int amount) throws NegativeGameComponentsException {
-		
+		if(amount < 0) throw new NegativeGameComponentsException();
+		remaining = amount;
 	}
 
 	/**
@@ -42,6 +43,7 @@ public class TokenType {
 	 * have any of this token type.
 	 */
 	void remove() throws NegativeGameComponentsException {
+		if(!hasAny()) throw new NegativeGameComponentsException();
 		remaining--;
 	}
 
