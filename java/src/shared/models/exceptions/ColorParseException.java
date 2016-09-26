@@ -13,4 +13,25 @@ package shared.models.exceptions;
  */
 public class ColorParseException extends Exception {
 	
+	public ColorParseException() {
+		super();
+	}
+	
+	public ColorParseException(String message) {
+		super(message);
+	}
+	
+	public ColorParseException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
+	public ColorParseException(String message, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+	
+	public ColorParseException(Throwable cause) {
+		super(cause);
+	}
+	
 }

@@ -14,4 +14,25 @@ package shared.models.exceptions;
  */
 public class NegativeGameComponentsException extends Exception {
 	
+	public NegativeGameComponentsException() {
+		super();
+	}
+	
+	public NegativeGameComponentsException(String message) {
+		super(message);
+	}
+	
+	public NegativeGameComponentsException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
+	public NegativeGameComponentsException(String message, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+	
+	public NegativeGameComponentsException(Throwable cause) {
+		super(cause);
+	}
+	
 }

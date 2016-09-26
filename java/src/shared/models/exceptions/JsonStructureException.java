@@ -13,4 +13,25 @@ package shared.models.exceptions;
  */
 public class JsonStructureException extends Exception {
 	
+	public JsonStructureException() {
+		super();
+	}
+	
+	public JsonStructureException(String message) {
+		super(message);
+	}
+	
+	public JsonStructureException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
+	public JsonStructureException(String message, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+	
+	public JsonStructureException(Throwable cause) {
+		super(cause);
+	}
+	
 }
