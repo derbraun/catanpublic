@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+
 /**
  * Class for managing a player's development cards
  */
@@ -44,6 +46,11 @@ public class DevelopmentCardManager {
 		monuments = aMonuments;
 		knights = aKnights;
 
+	}
+	
+	public DevelopmentCardManager(JsonObject playerJson) {
+		played = playerJson.get("playedDevCard").getAsBoolean();
+		yearOfPlenty = new DevelopmentCardType(playerJson);
 	}
 
 	public DevelopmentCardType getYearOfPlenty() {

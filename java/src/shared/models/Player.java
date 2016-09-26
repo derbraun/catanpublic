@@ -1,6 +1,7 @@
 package shared.models;
 
 import com.google.gson.JsonObject;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import shared.models.exceptions.ColorParseException;
@@ -15,7 +16,7 @@ import shared.models.exceptions.NegativeGameComponentsException;
 public class Player {
 
 	private String name;
-	private String color;
+	private Color color;
 	private int points;
 	private TokenManager tokens;
 	private ResourceManager resources;
@@ -30,24 +31,22 @@ public class Player {
 	 * @throws ColorParseException if aColor is not a hexidecimal
 	 * representation of a color.
 	 */
-	public Player(String aName, String aColor) throws ColorParseException {
+	public Player(String aName, Color aColor) throws ColorParseException,
+			NegativeGameComponentsException {
 		name = aName;
 		color = aColor;
 		points = 0;
-		try {
-			tokens = new TokenManager();
-		} catch (NegativeGameComponentsException ex) {}
-		resources = new ResourceManager();
-		try {
-			DevelopmentCardType yearOfPlenty = new DevelopmentCardType(0, false);
-			DevelopmentCardType monopoly = new DevelopmentCardType(0, false);
-			DevelopmentCardType roadBuilding = new DevelopmentCardType(0, false);
-			MonumentCards monuments = new MonumentCards(0);
-			KnightCards knights = new KnightCards(0, false, 0);
-			developmentCards = new DevelopmentCardManager(false, yearOfPlenty,
-					monopoly, roadBuilding, monuments, knights);
-		} catch(NegativeGameComponentsException ex) {}
+		tokens = new TokenManager(json);
+		resources = new ResourceManager(json);
+		developmentCards = DevelopmentCardManager(json);
 		
+		DevelopmentCardType yearOfPlenty = new DevelopmentCardType(0, false);
+		DevelopmentCardType monopoly = new DevelopmentCardType(0, false);
+		DevelopmentCardType roadBuilding = new DevelopmentCardType(0, false);
+		MonumentCards monuments = new MonumentCards(0);
+		KnightCards knights = new KnightCards(0, false, 0);
+		developmentCards = new DevelopmentCardManager(false, yearOfPlenty,
+				monopoly, roadBuilding, monuments, knights);
 	}
 
 	/**
@@ -60,10 +59,16 @@ public class Player {
 	 * @throws JsonStructureException if the json structure is
 	 * incorrect.
 	 */
-	public Player(JsonObject json) throws JsonStructureException {
+	public Player(JsonObject json) throws JsonStructureException,
+			ColorParseException, NotEnoughVictoryPointsException {
 		name = (String)json.get("name").getAsString();
-		color = json.get("color").getAsString();
-		
+		String colorString = json.get("color").getAsString();
+		color = Color.getColor(colorString);
+		if(color == null) {
+			throw new ColorParseException();
+		}
+		points = json.get("points").getAsInt();
+		if(points < 0) throw new NotEnoughVictoryPointsException();
 		
 	}
 
@@ -177,6 +182,9 @@ public class Player {
 	 */
 	public boolean canBuyDevelopmentCard() {
 		return resources.canAffordDevelopmentCard();
+	}
+	
+	private boolean canParseColor(String color) {
 	}
 
 }
