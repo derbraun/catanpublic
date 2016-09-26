@@ -32,13 +32,18 @@ public class ResourceManager {
 	 */
 	public ResourceManager(int numBricks, int numWood, int numGrain,
 			int numSheep, int numOre) throws NegativeGameComponentsException {
+		bricks = new ResourceType(numBricks);
+		wood = new ResourceType(numWood);
+		grain = new ResourceType(numGrain);
+		sheep = new ResourceType(numSheep);
+		ore = new ResourceType(numOre);
 	}
 
 	/**
 	 * Constructor. Initializes ResourceManager for start of game.
 	 */
-	public ResourceManager() {
-		
+	public ResourceManager() throws NegativeGameComponentsException {
+		this(0,0,0,0,0);
 	}
 
 	public ResourceType getBricks() {
