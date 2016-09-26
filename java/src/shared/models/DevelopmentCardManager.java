@@ -37,6 +37,12 @@ public class DevelopmentCardManager {
 			DevelopmentCardType aMonopoly,
             DevelopmentCardType aRoadBuilding,
 			MonumentCards aMonuments, KnightCards aKnights) {
+		played = aPlayed;
+		yearOfPlenty = aYearOfPlenty;
+		monopoly = aMonopoly;
+		roadBuilding = aRoadBuilding;
+		monuments = aMonuments;
+		knights = aKnights;
 
 	}
 
@@ -70,7 +76,11 @@ public class DevelopmentCardManager {
 	 * player's hand is set to playable.
 	 */
 	public void reset() {
-		
+		played = false;
+		yearOfPlenty.reset();
+		monopoly.reset();
+		roadBuilding.reset();
+		knights.reset();
 	}
 
 }
