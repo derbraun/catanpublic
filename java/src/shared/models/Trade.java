@@ -5,6 +5,8 @@
  */
 package shared.models;
 
+import shared.models.exceptions.NegativeGameComponentsException;
+
 /**
  * Contains information about a transaction between two players
  * or between a player and the bank.
@@ -16,7 +18,7 @@ public class Trade {
 	private final ResourceManager give;
 	private final ResourceManager receive;
 	
-	public Trade() {
+	public Trade() throws NegativeGameComponentsException {
 		give = new ResourceManager();
 		receive = new ResourceManager();
 	}
