@@ -23,6 +23,7 @@ public class DevelopmentCardType {
 	 * @throws NegativeGameComponentsException if amount is negative.
 	 */
 	public DevelopmentCardType(int amount, boolean isPlayable) throws NegativeGameComponentsException {
+		if(amount < 0) throw new NegativeGameComponentsException();
 		remaining = amount;
 		playable = isPlayable;
 	}
@@ -66,6 +67,7 @@ public class DevelopmentCardType {
 	 * card to discard.
 	 */
 	public void discard() throws NegativeGameComponentsException {
+		if(remaining < 1) throw new NegativeGameComponentsException();
 		remaining--;
 	}
 

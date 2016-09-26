@@ -21,6 +21,7 @@ public class MonumentCards extends DevelopmentCardType {
 	 */
 	public MonumentCards(int amount) throws NegativeGameComponentsException {
             super(amount, true);
+			if(amount < 0) throw new NegativeGameComponentsException();
 	}
 
 	/**

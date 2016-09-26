@@ -27,6 +27,9 @@ public class KnightCards extends DevelopmentCardType {
 	 */
 	public KnightCards(int amount, boolean isPlayable, int anArmySize) throws NegativeGameComponentsException  {
             super(amount, isPlayable);
+			if(amount < 0 || armySize < 0) {
+				throw new NegativeGameComponentsException();
+			}
             armySize = anArmySize;
 	}
 
@@ -44,7 +47,8 @@ public class KnightCards extends DevelopmentCardType {
 	 * @throws NegativeGameComponentsException if user does not have a
 	 * knight to play.
 	 */
-	public void moveKnightToArmy() {
+	public void moveKnightToArmy() throws NegativeGameComponentsException {
+		if(remaining < 1) throw new NegativeGameComponentsException();
 		remaining--;
 		armySize++;
 	}
