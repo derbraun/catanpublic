@@ -26,7 +26,12 @@ public class TokenManager {
 	 */
 	public TokenManager(int numRoads, int numSettlements, int numCities) 
 			throws NegativeGameComponentsException {
-
+		if(numRoads < 0 || numSettlements < 0 || numCities < 0) {
+			throw new NegativeGameComponentsException();
+		}
+		roads = new TokenType(numRoads);
+		settlements = new TokenType(numSettlements);
+		cities = new TokenType(numCities);
 	}
 
 	/**
