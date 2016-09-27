@@ -2,7 +2,9 @@ package shared.models;
 
 import java.util.List;
 import java.util.ArrayList;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import java.util.Iterator;
 import shared.models.exceptions.JsonStructureException;
 
@@ -14,12 +16,14 @@ import shared.models.exceptions.JsonStructureException;
 public class Log implements Iterable<Note> {
 
 	private List<Note> notes;
+	private NoteIterator iter;
 
 	/**
 	 * Constructor. Initializes as empty.
 	 */
 	public Log() {
 		notes = new ArrayList<Note>();
+		iter = new NoteIterator(notes);
 	}
 
 	/**
@@ -33,8 +37,18 @@ public class Log implements Iterable<Note> {
 	 * @throws JsonStructureException if json does not have the correct
 	 * structure.
 	 */
-	public Log(JsonObject json) throws JsonStructureException {
-
+	public Log(JsonObject json, String logType) throws JsonStructureException,
+			Player.DoesNotExistException {
+		this();
+		try {
+			JsonArray lines = json.getAsJsonArray(logType);
+			for(JsonElement line : lines) {
+				JsonObject noteJson = line.getAsJsonObject();
+				notes.add(new Note(noteJson));
+			}
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	/**
@@ -56,7 +70,7 @@ public class Log implements Iterable<Note> {
 	 * returns an iterator for it.
 	 */
 	public Iterator<Note> iterator() {
-            return null;
+            return iter;
 	}
 
 }
