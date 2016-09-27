@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
 import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
@@ -40,6 +42,20 @@ public class TokenManager {
 	 */
 	public TokenManager() throws NegativeGameComponentsException {
 		this(15, 5, 4);
+	}
+	
+	public TokenManager(JsonObject playerJson) throws JsonStructureException,
+			NegativeGameComponentsException { 
+		try {
+			int numRoads = playerJson.get("roads").getAsInt();
+			int numSettlements = playerJson.get("settlements").getAsInt();
+			int numCities = playerJson.get("cities").getAsInt();
+			roads = new TokenType(numRoads);
+			settlements = new TokenType(numSettlements);
+			cities = new TokenType(numCities);
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	public TokenType getRoads() {

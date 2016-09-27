@@ -36,9 +36,9 @@ public class Player {
 		name = aName;
 		color = aColor;
 		points = 0;
-		tokens = new TokenManager(json);
-		resources = new ResourceManager(json);
-		developmentCards = DevelopmentCardManager(json);
+		tokens = new TokenManager();
+		resources = new ResourceManager();
+		developmentCards = new DevelopmentCardManager();
 		
 		DevelopmentCardType yearOfPlenty = new DevelopmentCardType(0, false);
 		DevelopmentCardType monopoly = new DevelopmentCardType(0, false);
@@ -64,9 +64,7 @@ public class Player {
 		name = (String)json.get("name").getAsString();
 		String colorString = json.get("color").getAsString();
 		color = Color.getColor(colorString);
-		if(color == null) {
-			throw new ColorParseException();
-		}
+		if(color == null) throw new ColorParseException();
 		points = json.get("points").getAsInt();
 		if(points < 0) throw new NotEnoughVictoryPointsException();
 		
@@ -128,7 +126,7 @@ public class Player {
 		return name;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
@@ -182,9 +180,6 @@ public class Player {
 	 */
 	public boolean canBuyDevelopmentCard() {
 		return resources.canAffordDevelopmentCard();
-	}
-	
-	private boolean canParseColor(String color) {
 	}
 
 }

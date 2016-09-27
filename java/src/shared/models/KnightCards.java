@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
 import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
@@ -31,6 +33,18 @@ public class KnightCards extends DevelopmentCardType {
 				throw new NegativeGameComponentsException();
 			}
             armySize = anArmySize;
+	}
+	
+	public KnightCards(JsonObject playerJson) throws JsonStructureException,
+			NegativeGameComponentsException {
+		super(playerJson, "soldier");
+		armySize = playerJson.get("soldiers").getAsInt();
+		if(armySize < 0) throw new NegativeGameComponentsException();
+	}
+	
+	public KnightCards() throws NegativeGameComponentsException {
+		super();
+		armySize = 0;
 	}
 
 	public int getArmySize() {

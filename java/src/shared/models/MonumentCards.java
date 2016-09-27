@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
 import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
@@ -22,6 +24,14 @@ public class MonumentCards extends DevelopmentCardType {
 	public MonumentCards(int amount) throws NegativeGameComponentsException {
             super(amount, true);
 			if(amount < 0) throw new NegativeGameComponentsException();
+	}
+	
+	public MonumentCards() throws NegativeGameComponentsException {
+		super();
+	}
+	
+	public MonumentCards(JsonObject playerJson) throws JsonStructureException {
+		super(playerJson, "monument");
 	}
 
 	/**

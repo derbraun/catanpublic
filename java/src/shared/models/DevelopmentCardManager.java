@@ -1,6 +1,8 @@
 package shared.models;
 
 import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
+import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
  * Class for managing a player's development cards
@@ -48,9 +50,26 @@ public class DevelopmentCardManager {
 
 	}
 	
-	public DevelopmentCardManager(JsonObject playerJson) {
-		played = playerJson.get("playedDevCard").getAsBoolean();
-		yearOfPlenty = new DevelopmentCardType(playerJson);
+	public DevelopmentCardManager() throws NegativeGameComponentsException {
+		played = false;
+		yearOfPlenty = new DevelopmentCardType();
+		monopoly = new DevelopmentCardType();
+		roadBuilding = new DevelopmentCardType();
+		monuments = new MonumentCards();
+	}
+	
+	public DevelopmentCardManager(JsonObject playerJson)
+			throws JsonStructureException, NegativeGameComponentsException { 
+		try {
+			played = playerJson.get("playedDevCard").getAsBoolean();
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
+		yearOfPlenty = new DevelopmentCardType(playerJson, "yearOfPlenty");
+		monopoly = new DevelopmentCardType(playerJson, "monopoly");
+		roadBuilding = new DevelopmentCardType(playerJson, "roadBuilding");
+		monuments = new MonumentCards(playerJson);
+		knights = new KnightCards(playerJson);
 	}
 
 	public DevelopmentCardType getYearOfPlenty() {

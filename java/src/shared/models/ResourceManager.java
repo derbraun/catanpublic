@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
 import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
@@ -44,6 +46,24 @@ public class ResourceManager {
 	 */
 	public ResourceManager() throws NegativeGameComponentsException {
 		this(0,0,0,0,0);
+	}
+	
+	public ResourceManager(JsonObject json) throws JsonStructureException,
+			NegativeGameComponentsException {
+		try {
+			int numBricks = json.get("brick").getAsInt();
+			int numWood = json.get("wood").getAsInt();
+			int numGrain = json.get("grain").getAsInt();
+			int numSheep = json.get("sheep").getAsInt();
+			int numOre = json.get("ore").getAsInt();
+			bricks = new ResourceType(numBricks);
+			wood = new ResourceType(numWood);
+			grain = new ResourceType(numGrain);
+			sheep = new ResourceType(numSheep);
+			ore = new ResourceType(numOre);
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	public ResourceType getBricks() {

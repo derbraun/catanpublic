@@ -1,5 +1,7 @@
 package shared.models;
 
+import com.google.gson.JsonObject;
+import shared.models.exceptions.JsonStructureException;
 import shared.models.exceptions.NegativeGameComponentsException;
 
 /**
@@ -26,6 +28,23 @@ public class DevelopmentCardType {
 		if(amount < 0) throw new NegativeGameComponentsException();
 		remaining = amount;
 		playable = isPlayable;
+	}
+	
+	public DevelopmentCardType() throws NegativeGameComponentsException {
+		this(0, false);
+	}
+	
+	public DevelopmentCardType(JsonObject playerJson, String cardType)
+			throws JsonStructureException {
+		try {
+			JsonObject oldCards = playerJson.get("oldDevCards").getAsJsonObject();
+			int oldAmount = oldCards.get(cardType).getAsInt();
+			playable = oldAmount > 0;
+			JsonObject newCards = playerJson.get("newDevCards").getAsJsonObject();
+			remaining = newCards.get(cardType).getAsInt();
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	/**
