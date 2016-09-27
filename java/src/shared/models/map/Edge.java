@@ -141,7 +141,7 @@ public class Edge {
 	 * @return true if the edge has a port of the port type, false otherwise
 	 */
 	public boolean hasPort(PortType type){
-		if (port != null && port.type.equals(type)){
+		if (port != null && port.getType().equals(type)){
 			return true;
 		}
 		return false;
@@ -184,4 +184,63 @@ public class Edge {
 		}
 		return highestFromHere;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((adjacentEdges == null) ? 0 : adjacentEdges.hashCode());
+		result = prime * result + ((loc == null) ? 0 : loc.hashCode());
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		result = prime * result + ((road == null) ? 0 : road.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Edge other = (Edge) obj;
+		if (adjacentEdges == null) {
+			if (other.adjacentEdges != null)
+				return false;
+		} else if (!adjacentEdges.equals(other.adjacentEdges))
+			return false;
+		if (loc == null) {
+			if (other.loc != null)
+				return false;
+		} else if (!loc.equals(other.loc))
+			return false;
+		if (port == null) {
+			if (other.port != null)
+				return false;
+		} else if (!port.equals(other.port))
+			return false;
+		if (road == null) {
+			if (other.road != null)
+				return false;
+		} else if (!road.equals(other.road))
+			return false;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Edge [road=" + road + ", port=" + port + ", loc=" + loc + ", adjacentEdges=" + adjacentEdges + "]";
+	}
+	
+	
 }

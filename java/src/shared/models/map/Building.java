@@ -77,6 +77,52 @@ public class Building {
 		this.isUpgraded = true;
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isUpgraded ? 1231 : 1237);
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((pIndex == null) ? 0 : pIndex.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Building other = (Building) obj;
+		if (isUpgraded != other.isUpgraded)
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (pIndex != other.pIndex)
+			return false;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Building [location=" + location + ", pIndex=" + pIndex + ", isCity=" + isUpgraded + "]";
+	}
+	
 	
 	
 }

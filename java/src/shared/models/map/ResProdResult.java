@@ -1,5 +1,6 @@
 package shared.models.map;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,16 @@ public class ResProdResult {
 	 * 
 	 */
 	public void addResult(PlayerIndex pIndex, ResourceType type, int numResource){
-		
+		if (pIndex == null || type == null || numResource < 1){
+			throw new IllegalArgumentException();
+		}
+		numPerResource.put(type, numPerResource.getOrDefault(type, 0) + numResource);
+		if (!resourcesByPlayer.containsKey(pIndex)){
+			resourcesByPlayer.put(pIndex, new ArrayList<ResourceType>());
+		}
+		for (int i = 0; i < numResource; i++){
+			resourcesByPlayer.get(pIndex).add(type);
+		}
 	}
 
 	/**
@@ -59,7 +69,10 @@ public class ResProdResult {
 	 * @return The number of resources to distribute
 	 */
 	public int getNumResOfType(ResourceType type){
-		return 0;
+		if (type == null){
+			throw new IllegalArgumentException();
+		}
+		return numPerResource.get(type);
 	}
 	
 	/**
@@ -69,6 +82,63 @@ public class ResProdResult {
 	 * @return the number of resources to distribute to the player
 	 */
 	public int getNumResOfTypeForPlayer(PlayerIndex pIndex,ResourceType type){
-		return 0;
+		if (pIndex == null || type == null){
+			throw new IllegalArgumentException();
+		}
+		int numResources = 0;
+		List<ResourceType> playerResources = resourcesByPlayer.get(pIndex);
+		for (ResourceType elem : playerResources){
+			if (elem.equals(type)){
+				numResources++;
+			}
+		}
+		return numResources;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numPerResource == null) ? 0 : numPerResource.hashCode());
+		result = prime * result + ((resourcesByPlayer == null) ? 0 : resourcesByPlayer.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResProdResult other = (ResProdResult) obj;
+		if (numPerResource == null) {
+			if (other.numPerResource != null)
+				return false;
+		} else if (!numPerResource.equals(other.numPerResource))
+			return false;
+		if (resourcesByPlayer == null) {
+			if (other.resourcesByPlayer != null)
+				return false;
+		} else if (!resourcesByPlayer.equals(other.resourcesByPlayer))
+			return false;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ResProdResult [numPerResource=" + numPerResource + ", resourcesByPlayer=" + resourcesByPlayer + "]";
+	}
+	
+	
 }
