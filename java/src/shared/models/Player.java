@@ -2,6 +2,8 @@ package shared.models;
 
 import com.google.gson.JsonObject;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import shared.models.exceptions.ColorParseException;
@@ -14,6 +16,18 @@ import shared.models.exceptions.NegativeGameComponentsException;
  * playing a single game.
  */
 public class Player {
+	
+	private final static Map<String, Player> all = new HashMap<String, Player>();
+	
+	private static void setPlayerAtName(String name, Player player) {
+		all.put(name, player);
+	}
+	
+	public static Player getByName(String name) throws DoesNotExistException {
+		Player result = all.get(name);
+		if(result == null) throw new DoesNotExistException();
+		return result;
+	}
 
 	private String name;
 	private Color color;
@@ -47,6 +61,8 @@ public class Player {
 		KnightCards knights = new KnightCards(0, false, 0);
 		developmentCards = new DevelopmentCardManager(false, yearOfPlenty,
 				monopoly, roadBuilding, monuments, knights);
+		
+		setPlayerAtName(name, this);
 	}
 
 	/**
@@ -76,6 +92,7 @@ public class Player {
 		} catch(ClassCastException | IllegalStateException ex) {
 			throw new JsonStructureException(ex);
 		}
+		setPlayerAtName(name, this);
 	}
 
 	public int getPoints() {
@@ -188,6 +205,31 @@ public class Player {
 	 */
 	public boolean canBuyDevelopmentCard() {
 		return resources.canAffordDevelopmentCard();
+	}
+	
+	public static class DoesNotExistException extends Exception {
+		
+		public DoesNotExistException() {
+			super();
+		}
+
+		public DoesNotExistException(String message) {
+			super(message);
+		}
+
+		public DoesNotExistException(String message, Throwable cause) {
+			super(message, cause);
+		}
+
+		public DoesNotExistException(String message, Throwable cause,
+				boolean enableSuppression, boolean writableStackTrace) {
+			super(message, cause, enableSuppression, writableStackTrace);
+		}
+
+		public DoesNotExistException(Throwable cause) {
+			super(cause);
+		}
+		
 	}
 
 }
