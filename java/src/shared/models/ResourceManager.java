@@ -137,5 +137,19 @@ public class ResourceManager {
 		return bricks.numLeft() + wood.numLeft() + sheep.numLeft()
 			+ grain.numLeft() + ore.numLeft();
 	}
+	
+	public void addResources(ResourceManager addable)
+			throws NegativeGameComponentsException {
+		int addableBricks = addable.getBricks().numLeft();
+		int addableWood = addable.getWood().numLeft();
+		int addableGrain = addable.getGrain().numLeft();
+		int addableSheep = addable.getSheep().numLeft();
+		int addableOre = addable.getOre().numLeft();
+		bricks.draw(addableBricks);
+		wood.draw(addableWood);
+		grain.draw(addableGrain);
+		sheep.draw(addableSheep);
+		ore.draw(addableOre);
+	}
 
 }
