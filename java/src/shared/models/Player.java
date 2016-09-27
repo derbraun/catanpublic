@@ -60,14 +60,22 @@ public class Player {
 	 * incorrect.
 	 */
 	public Player(JsonObject json) throws JsonStructureException,
-			ColorParseException, NotEnoughVictoryPointsException {
+			ColorParseException, NotEnoughVictoryPointsException,
+			NegativeGameComponentsException {
 		name = (String)json.get("name").getAsString();
 		String colorString = json.get("color").getAsString();
 		color = Color.getColor(colorString);
 		if(color == null) throw new ColorParseException();
 		points = json.get("points").getAsInt();
 		if(points < 0) throw new NotEnoughVictoryPointsException();
-		
+		developmentCards = new DevelopmentCardManager(json);
+		tokens = new TokenManager(json);
+		try {
+			JsonObject resourcesJson = json.get("resources").getAsJsonObject();
+			resources = new ResourceManager(resourcesJson);
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	public int getPoints() {
@@ -153,7 +161,7 @@ public class Player {
 	}
 
 	/**
-	 * Checks to see if the player can buy a settlment.
+	 * Checks to see if the player can buy a settlement.
 	 *
 	 * @return true if the player has a settlement token and can afford to use
 	 * it, false otherwise
