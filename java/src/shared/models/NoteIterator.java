@@ -1,6 +1,7 @@
 package shared.models;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Iterator class used by the Log class to make it iterable. If you want
@@ -12,13 +13,22 @@ import java.util.Iterator;
  * a note once it has been added.
  */
 public class NoteIterator implements Iterator<Note> {
+	
+	List<Note> notes;
+	int currentIndex;
+	
+	public NoteIterator(List<Note> someNotes) {
+		currentIndex = 0;
+		notes = someNotes;
+	}
 
 	public boolean hasNext() {
-            return true;
+		return currentIndex < notes.size() - 1;
 	}
 
 	public Note next() {
-            return null;
+        currentIndex++;
+		return notes.get(currentIndex);
 	}
 
 	/**
