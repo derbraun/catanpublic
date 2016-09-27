@@ -35,8 +35,15 @@ public class Note {
 	 * @throws JsonStructureException if the structure of the provided
 	 * json is incorrect.
 	 */
-	public Note(JsonObject json) throws JsonStructureException {
-            this(null, null);
+	public Note(JsonObject json) throws JsonStructureException,
+			Player.DoesNotExistException {
+		try {
+			String playerName = json.get("source").getAsString();
+			player = Player.getByName(playerName);
+			content = json.get("message").getAsString();
+		} catch(ClassCastException | IllegalStateException ex) {
+			throw new JsonStructureException(ex);
+		}
 	}
 
 	public Player getPlayer() {
