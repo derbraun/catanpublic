@@ -1,5 +1,7 @@
 package shared.models.map;
 
+import shared.models.exceptions.BuildingNotUpgradableException;
+
 import shared.definitions.PlayerIndex;
 import shared.locations.VertexLocation;
 
@@ -9,24 +11,15 @@ import shared.locations.VertexLocation;
  * @author Cory
  *
  */
-public abstract class Building {
+public class Building {
 
-	/**
-	 * Where the building is located
-	 */
+	/** Where the building is located */
 	private VertexLocation location;
-	
-	/**
-	 * Who owns the building
-	 */
+	/** Who owns the building */
 	private PlayerIndex pIndex;
-	
-	/**
-	 * false = settlement, true = city
-	 */
+	/** false = settlement, true = city */
 	private boolean isUpgraded = false;
 
-	
 	
 	/**
 	 * When a building is constructed it is always not upgraded (a settlement)
@@ -35,6 +28,7 @@ public abstract class Building {
 	 */
 	public Building(VertexLocation location, PlayerIndex pIndex) {
 		super();
+		
 		this.location = location;
 		this.pIndex = pIndex;
 		this.isUpgraded = false;
@@ -57,12 +51,16 @@ public abstract class Building {
 	/**
 	 * @return true if the building is a settlement, false if it's a city
 	 */
-	public abstract boolean isSettlement();
+	public boolean isSettlement(){
+		return !isUpgraded;
+	}
 	
 	/**
 	 * @return false if the building is a settlement, true if it's a city
 	 */
-	public abstract boolean isCity();
+	public boolean isCity(){
+		return isUpgraded;
+	}
 
 	/**
 	 * Upgrade the building to be a city
@@ -72,7 +70,7 @@ public abstract class Building {
 	 * @post isUpgraded = true
 	 * 
 	 */
-	public void upgrade() throws BuildingNotUpgradableException{
+	public void upgradeToCity() throws BuildingNotUpgradableException{
 		if (isUpgraded){
 			throw new BuildingNotUpgradableException();
 		}

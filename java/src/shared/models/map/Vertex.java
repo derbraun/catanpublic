@@ -1,11 +1,10 @@
 package shared.models.map;
 
-import java.util.ArrayList;
+import shared.models.exceptions.InvalidBuildingPlacementException;
 import java.util.Set;
 
 import shared.definitions.PlayerIndex;
 import shared.definitions.PortType;
-import shared.locations.EdgeLocation;
 import shared.locations.VertexLocation;
 
 /**

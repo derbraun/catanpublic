@@ -106,5 +106,137 @@ public class EdgeLocation
 				return null;
 		}
 	}
+	
+	/**
+	 * Checks for adjacency of this edge location to another edge location
+	 * @param adj
+	 * @return True if adjacent, false otherwise
+	 */
+	public boolean isAdjacent(EdgeLocation adj){
+		
+		if(adj == null)
+		{
+			throw new IllegalArgumentException("adj cannot be null");
+		}
+		
+		if (this.equals(adj)){return false;}
+		
+		switch (dir)
+		{
+			case NorthWest:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.North) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.North) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.North) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast)){
+					return true;
+				}
+				break;
+			case North:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest)){
+					return true;
+				}
+				break;
+			case NorthEast:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.North) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.North) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.North) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North)){
+					return true;
+				}
+				break;
+			case SouthWest:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.South) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.South) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North)){
+					return true;
+				}
+				break;
+			case South:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthWest) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.SouthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest)){
+					return true;
+				}
+				break;
+			case SouthEast:
+				if ((this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.South) ||
+						(this.hexLoc == adj.hexLoc && adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North) ||
+						(this.hexLoc.getNeighborLoc(this.dir) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.South) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.NorthEast) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.South) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.North) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.SouthWest) ||
+						(this.hexLoc.getNeighborLoc(EdgeDirection.NorthEast) == adj.hexLoc 
+							&& adj.dir == EdgeDirection.South)){
+					return true;
+				}
+				break;
+			default:
+				assert false;
+				return false;
+		}
+		
+		return false;
+	}
 }
 

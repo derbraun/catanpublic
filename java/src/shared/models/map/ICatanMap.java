@@ -1,5 +1,9 @@
 package shared.models.map;
 
+import shared.models.exceptions.BuildingNotUpgradableException;
+import shared.models.exceptions.InvalidBuildingPlacementException;
+import shared.models.exceptions.InvalidRoadPlacementException;
+import shared.models.map.ResProdResult;
 import shared.definitions.PlayerIndex;
 import shared.definitions.PortType;
 import shared.locations.EdgeLocation;

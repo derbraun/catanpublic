@@ -1,5 +1,9 @@
 package shared.models.map;
 
+import shared.models.exceptions.EdgeNotAdjacentException;
+import shared.models.exceptions.InvalidRoadPlacementException;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,21 +21,13 @@ import shared.locations.EdgeLocation;
  */
 public class Edge {
 
-	/**
-	 * The Road Placed on the Edge (If there is one)
-	 */
+	/** The Road Placed on the Edge (If there is one) */
 	private Road road;
-	
-	/**
-	 * The port associated with the Edge (If there is one)
-	 */
+	/** The port associated with the Edge (If there is one) */
 	private Port port;
-	
-	/**
-	 * The normalized location of this edge
-	 */
+	/** The normalized location of this edge */
 	private EdgeLocation loc;
-	
+	/** The edges adjacent to this edge */
 	private Set<Edge> adjacentEdges;
 	
 	
@@ -43,7 +39,7 @@ public class Edge {
 	 * 
 	 */
 	public Edge(EdgeLocation loc) {
-		this.loc = loc;
+		this.loc = loc.getNormalizedLocation();
 	}
 
 	/**
@@ -51,11 +47,19 @@ public class Edge {
 	 * Also passes it's own reference to the edge that was passed in
 	 * @param adj The Adjacent Edge
 	 * @pre adj != this
+	 * @pre adjacentEdges.find(adj) = false
 	 * @pre this.adjacentEdges.size < 4
 	 * @post this.adjacentEdges.find(adj) = true
 	 */
 	public void addAdjacentEdge(Edge adj) throws EdgeNotAdjacentException{
-		
+		if (this.loc.isAdjacent(adj.loc) && !adjacentEdges.contains(adj)){
+			adjacentEdges.add(adj);
+		} else {
+			throw new EdgeNotAdjacentException("Edges are not adjacent");
+		}
+		if (!adj.hasAdjacentEdge(this.loc)){
+			adj.addAdjacentEdge(this);
+		}
 	}
 	
 	/**
@@ -64,8 +68,14 @@ public class Edge {
 	 * @pre loc.getNormalizedLocation = loc
 	 * @return true if exists, false otherwise
 	 */
-	public boolean hasAdjacentEdge(EdgeLocation loc){
-		return false;
+	public boolean hasAdjacentEdge(EdgeLocation location){
+		boolean found = false;
+		for (Edge elem: adjacentEdges){
+			if (elem.loc.getNormalizedLocation().equals(location.getNormalizedLocation())){
+				found = true;
+			}
+		}
+		return found;
 	}
 	
 	/**
@@ -73,7 +83,7 @@ public class Edge {
 	 * @return true if a Road is on the Edge, false otherwise
 	 */
 	public boolean hasRoad(){
-		return false;
+		return (road != null);
 	}
 	
 	/**
@@ -82,6 +92,11 @@ public class Edge {
 	 * @return true if there is a Road owned by the indicated Player, false otherwise
 	 */
 	public boolean hasRoadOfPlayer(PlayerIndex pIndex){
+		if (hasRoad()){
+			if (road.getPlayerIndex().equals(pIndex)){
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -91,6 +106,14 @@ public class Edge {
 	 * @return
 	 */
 	public boolean canPlaceRoad(PlayerIndex pIndex){
+		if (hasRoad()){
+			return false;
+		}
+		for (Edge elem:adjacentEdges){
+			if (elem.hasRoadOfPlayer(pIndex)){
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -104,7 +127,12 @@ public class Edge {
 	 * @return The newly placed Road
 	 */
 	public Road placeRoad(PlayerIndex pIndex) throws InvalidRoadPlacementException{
-		return null;
+		if (canPlaceRoad(pIndex)){
+			road = new Road(this.loc,pIndex);
+		} else {
+			throw new InvalidRoadPlacementException("Player cannot build road at this border");
+		}
+		return road;
 	}
 	
 	/**
@@ -113,6 +141,9 @@ public class Edge {
 	 * @return true if the edge has a port of the port type, false otherwise
 	 */
 	public boolean hasPort(PortType type){
+		if (port != null && port.type.equals(type)){
+			return true;
+		}
 		return false;
 	}
 	
@@ -125,6 +156,7 @@ public class Edge {
 	 * @return The length of the longest consecutive road
 	 */
 	public int findLongestRoadOfPlayer(PlayerIndex pIndex){
+		
 		return 0;
 	}
 	
@@ -135,6 +167,21 @@ public class Edge {
 	 * @return
 	 */
 	public int findLongestRoadRecursive(Set<EdgeLocation> path, PlayerIndex pIndex){
-		return 0;
+		int highestFromHere = 0;
+		Set<EdgeLocation> currentPath = new HashSet<>(path);
+		for(Edge elem : adjacentEdges){
+			if (!path.contains(elem.loc)){
+				if (elem.hasRoadOfPlayer(pIndex)){
+					int numRoads = elem.findLongestRoadRecursive(currentPath, pIndex);
+					if (numRoads > highestFromHere){
+						highestFromHere = numRoads;
+						path = currentPath;
+					}
+					currentPath.clear();
+					currentPath.addAll(path);	
+				}
+			}
+		}
+		return highestFromHere;
 	}
 }
