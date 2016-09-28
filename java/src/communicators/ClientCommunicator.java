@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import shared.exceptions.ClientException;
 import shared.inputObjects.InputObject;
 import shared.outputObjects.OutputObject;
@@ -27,13 +30,15 @@ public class ClientCommunicator {
 	private static final int MIN_PORT_NUMBER = 1;
 	private static final int MAX_PORT_NUMBER = 65535;
 	
+	private XStream xmlStream;
+	
 	/**
 	 * Creates an instance of the ClientCommunicator class
 	 * @pre none
 	 * @post A ClientCommunicator object
 	 */
 	private ClientCommunicator() {
-
+		xmlStream = new XStream(new DomDriver());
 	}
 	
 	/** 
@@ -95,7 +100,7 @@ public class ClientCommunicator {
 			connection.setRequestMethod(HTTP_POST);
 			connection.setDoOutput(true);
 			connection.connect();
-			//xmlStream.toXML(input, connection.getOutputStream());
+			xmlStream.toXML(input, connection.getOutputStream());
 			connection.getOutputStream().close();
 			
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -103,7 +108,7 @@ public class ClientCommunicator {
 				// If the response length is equal to -1, then the length is unknown
 				if (connection.getContentLength() == UNKNOWN_RESPONSE_LENGTH) {
 					
-					//result = xmlStream.fromXML(connection.getInputStream());
+					result = xmlStream.fromXML(connection.getInputStream());
 				}
 				else if (connection.getContentLength() > 0) {
 					
@@ -145,9 +150,7 @@ public class ClientCommunicator {
 				//Assumption: On a get, the server will return the number of bytes
 				//in the response body.
 				if(connection.getContentLength() >= 0) {
-					InputStream is = connection.getInputStream();
-					result = new byte[connection.getContentLength()];
-					//is.read(result);
+					result = xmlStream.fromXML(connection.getInputStream());
 				} else {
 					throw new ClientException(
 							String.format("get failed: %s, the content length must be >= 0", fileName));

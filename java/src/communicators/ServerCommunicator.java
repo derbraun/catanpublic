@@ -3,10 +3,14 @@ package communicators;
 import java.io.*;
 import java.net.*;
 
+import server.ServerFacade;
 import server.ServerProxy;
+import shared.inputObjects.*;
+import shared.outputObjects.*;
+
 import com.sun.net.httpserver.*;
-//import com.thoughtworks.xstream.XStream;
-//import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
 public class ServerCommunicator {
@@ -16,7 +20,7 @@ public class ServerCommunicator {
 	private static final int MAX_WAITING_CONNECTIONS = 10;
 	
 	private HttpServer server;
-	//private XStream xmlStream = new XStream(new DomDriver());
+	private XStream xmlStream = new XStream(new DomDriver());
 	
 	private ServerCommunicator() {
 		return;
@@ -108,6 +112,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			LoginUserOutput loginUserOutput = null;
+			LoginUserInput input = (LoginUserInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				loginUserOutput = ServerFacade.SINGLETON.LoginUser(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(loginUserOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -125,6 +146,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			RegisterUserOutput registerUserOutput = null;
+			RegisterUserInput input = (RegisterUserInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				registerUserOutput = ServerFacade.SINGLETON.RegisterUser(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(registerUserOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -142,6 +180,22 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			CurrentGamesOutput currentGamesOutput = null;
+			
+			try {
+				
+				currentGamesOutput = ServerFacade.SINGLETON.GetCurrentListOfGames();
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(currentGamesOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -159,6 +213,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			CreateGameOutput createGameOutput = null;
+			CreateGameInput input = (CreateGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				createGameOutput = ServerFacade.SINGLETON.CreateGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(createGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -176,6 +247,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			JoinGameOutput joinGameOutput = null;
+			JoinGameInput input = (JoinGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				joinGameOutput = ServerFacade.SINGLETON.JoinGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(joinGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -193,6 +281,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			SaveGameOutput saveGameOutput = null;
+			SaveGameInput input = (SaveGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				saveGameOutput = ServerFacade.SINGLETON.SaveGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(saveGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -210,6 +315,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			LoadGameOutput loadGameOutput = null;
+			LoadGameInput input = (LoadGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				loadGameOutput = ServerFacade.SINGLETON.LoadGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(loadGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -227,6 +349,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			UpdateCurrentGameStateOutput updateCurrentGameStateOutput = null;
+			UpdateCurrentGameStateInput input = (UpdateCurrentGameStateInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				updateCurrentGameStateOutput = ServerFacade.SINGLETON.UpdateCurrentGameState(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(updateCurrentGameStateOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -244,6 +383,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			ResetGameOutput resetGameOutput = null;
+			ResetGameInput input = (ResetGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				resetGameOutput = ServerFacade.SINGLETON.ResetGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(resetGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -261,6 +417,22 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			GetCommandsForGameOutput getCommandsForGameOutput = null;
+			
+			try {
+				
+				getCommandsForGameOutput = ServerFacade.SINGLETON.GetCommandsForGame();
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(getCommandsForGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -278,6 +450,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			SetCommandsForGameOutput setCommandsForGameOutput = null;
+			SetCommandsForGameInput input = (SetCommandsForGameInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				setCommandsForGameOutput = ServerFacade.SINGLETON.SetCommandsForGame(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(setCommandsForGameOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -295,6 +484,22 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			AITypesOutput getAITypesOutput = null;
+			
+			try {
+				
+				getAITypesOutput = ServerFacade.SINGLETON.GetAITypes();
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(getAITypesOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -312,6 +517,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			AddAIPlayerOutput addAIPlayerOutput = null;
+			AddAIPlayerInput input = (AddAIPlayerInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				addAIPlayerOutput = ServerFacade.SINGLETON.AddAIPlayer(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(addAIPlayerOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -329,6 +551,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			ServerLogLevelOutput serverLogLevelOutput = null;
+			ServerLogLevelInput input = (ServerLogLevelInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				serverLogLevelOutput = ServerFacade.SINGLETON.SetServerLogLevel(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(serverLogLevelOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -346,6 +585,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			SendChatOutput sendChatOutput = null;
+			SendChatInput input = (SendChatInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				sendChatOutput = ServerFacade.SINGLETON.SendChat(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(sendChatOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -363,6 +619,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			AcceptTradeOutput acceptTradeOutput = null;
+			AcceptTradeInput input = (AcceptTradeInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				acceptTradeOutput = ServerFacade.SINGLETON.AcceptTrade(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(acceptTradeOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -380,6 +653,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			DiscardCardsOutput discardCardsOutput = null;
+			DiscardCardsInput input = (DiscardCardsInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				discardCardsOutput = ServerFacade.SINGLETON.DiscardCards(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(discardCardsOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -397,6 +687,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			RollDiceOutput rollDiceOutput = null;
+			RollDiceInput input = (RollDiceInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				rollDiceOutput = ServerFacade.SINGLETON.RollDice(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(rollDiceOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -414,6 +721,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			BuildRoadOutput buildRoadOutput = null;
+			BuildRoadInput input = (BuildRoadInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				buildRoadOutput = ServerFacade.SINGLETON.BuildRoad(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(buildRoadOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -431,6 +755,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			BuildSettlementOutput buildSettlementOutput = null;
+			BuildSettlementInput input = (BuildSettlementInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				buildSettlementOutput = ServerFacade.SINGLETON.BuildSettlement(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(buildSettlementOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -448,6 +789,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			BuildCityOutput buildCityOutput = null;
+			BuildCityInput input = (BuildCityInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				buildCityOutput = ServerFacade.SINGLETON.BuildCity(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(buildCityOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -460,11 +818,28 @@ public class ServerCommunicator {
 		 * The HTTP handler for offering a trade
 		 * @throws IOException
 		 * @pre exchange is not null
-		 * @post If succesful, a trade will have been offered, otherwise an error will be return in the response
+		 * @post If successful, a trade will have been offered, otherwise an error will be return in the response
 		 */
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			OfferTradeOutput offerTradeOutput = null;
+			OfferTradeInput input = (OfferTradeInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				offerTradeOutput = ServerFacade.SINGLETON.OfferTrade(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(offerTradeOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -482,6 +857,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			MaritimeTradeOutput maritimeTradeOutput = null;
+			MaritimeTradeInput input = (MaritimeTradeInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				maritimeTradeOutput = ServerFacade.SINGLETON.MaritimeTrade(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(maritimeTradeOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -499,6 +891,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			RobPlayerOutput robPlayerOutput = null;
+			RobPlayerInput input = (RobPlayerInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				robPlayerOutput = ServerFacade.SINGLETON.RobPlayer(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(robPlayerOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -516,6 +925,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			FinishTurnOutput finishTurnOutput = null;
+			FinishTurnInput input = (FinishTurnInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				finishTurnOutput = ServerFacade.SINGLETON.FinishTurn(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(finishTurnOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -533,6 +959,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			BuyDevCardOutput buyDevCardOutput = null;
+			BuyDevCardInput input = (BuyDevCardInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				buyDevCardOutput = ServerFacade.SINGLETON.BuyDevCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(buyDevCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -550,6 +993,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			PlaySoldierCardOutput playSoldierCardOutput = null;
+			PlaySoldierCardInput input = (PlaySoldierCardInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				playSoldierCardOutput = ServerFacade.SINGLETON.PlaySoldierCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(playSoldierCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -567,6 +1027,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			PlayYearOfPlentyCardOutput playYearOfPlentyCardOutput = null;
+			PlayYearOfPlentyCardInput input = (PlayYearOfPlentyCardInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				playYearOfPlentyCardOutput = ServerFacade.SINGLETON.PlayYearOfPlentyCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(playYearOfPlentyCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -583,7 +1060,24 @@ public class ServerCommunicator {
 		 */
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
+		
+			PlayRoadBuildingCardOutput playRoadBuildingCardOutput = null;
+			PlayRoadBuildingCardInput input = (PlayRoadBuildingCardInput)xmlStream.fromXML(exchange.getRequestBody());
 			
+			try {
+				
+				playRoadBuildingCardOutput = ServerFacade.SINGLETON.PlayRoadBuildingCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(playRoadBuildingCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -601,6 +1095,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			PlayMonopolyCardOutput playMonopolyCardOutput = null;
+			PlayMonopolyCardInput input = (PlayMonopolyCardInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				playMonopolyCardOutput = ServerFacade.SINGLETON.PlayMonopolyCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(playMonopolyCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
@@ -618,6 +1129,23 @@ public class ServerCommunicator {
 		@Override
 		public void handle(HttpExchange exchange) throws IOException {
 			
+			PlayMonumentCardOutput playMonumentCardOutput = null;
+			PlayMonumentCardInput input = (PlayMonumentCardInput)xmlStream.fromXML(exchange.getRequestBody());
+			
+			try {
+				
+				playMonumentCardOutput = ServerFacade.SINGLETON.PlayMonumentCard(input);
+			}
+			catch (Exception e) { // FileNotFoundException | ServerException
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, -1);
+				return;
+			}
+			
+			exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+			xmlStream.toXML(playMonumentCardOutput, exchange.getResponseBody());
+			exchange.getResponseBody().close();
 		}
 	};
 	
