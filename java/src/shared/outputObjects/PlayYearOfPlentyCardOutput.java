@@ -6,12 +6,34 @@ package shared.outputObjects;
 public class PlayYearOfPlentyCardOutput extends OutputObject {
 	
 	/**
+	 * Indicates whether or not the operation was successful
+	 */
+	String success;
+	
+	/**
 	 * Creates an instance of the PlayYearOfPlentyCard output parameters object
 	 * @pre none
 	 * @post An PlayYearOfPlentyCardOutput object is created
 	 */
 	public PlayYearOfPlentyCardOutput() {
+		this.success = "TRUE";
+	}
+	
+	/**
+	 * An overload constructor to handle failed operations
+	 * @param success Indicates whether or not the operation was successful
+	 */
+	public PlayYearOfPlentyCardOutput(String success) {
 		
+		this.success = success;
+	}
+	
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 	
 	/**
@@ -20,7 +42,7 @@ public class PlayYearOfPlentyCardOutput extends OutputObject {
 	@Override
 	public boolean Failed() {
 		// TODO Auto-generated method stub
-		return false;
+		return success.equals("FALSE") || success.equals("FAILED");
 	}
 
 }

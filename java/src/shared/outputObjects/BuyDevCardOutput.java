@@ -6,12 +6,34 @@ package shared.outputObjects;
 public class BuyDevCardOutput extends OutputObject {
 
 	/**
+	 * Indicates whether or not the operation was successful
+	 */
+	String success;
+	
+	/**
 	 * Creates an instance of the BuyDevCard output parameters object
 	 * @pre none
 	 * @post An BuyDevCardOutput object is created
 	 */
 	public BuyDevCardOutput() {
+		this.success = "TRUE";
+	}
+	
+	/**
+	 * An overload constructor to handle failed operations
+	 * @param success Indicates whether or not the operation was successful
+	 */
+	public BuyDevCardOutput(String success) {
 		
+		this.success = success;
+	}
+	
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 	
 	/**
@@ -20,7 +42,7 @@ public class BuyDevCardOutput extends OutputObject {
 	@Override
 	public boolean Failed() {
 		// TODO Auto-generated method stub
-		return false;
+		return success.equals("FALSE") || success.equals("FAILED");
 	}
 
 }
