@@ -1,5 +1,7 @@
 package shared.inputObjects;
 
+import shared.definitions.ResourceType;
+
 /**
  * Holds the input parameters needed for MaritimeTrade()
  */
@@ -18,12 +20,12 @@ public class MaritimeTradeInput extends InputObject {
 	/**
 	 * The resource the player is giving
 	 */
-	Resource inputResource;
+	ResourceType inputResource;
 	
 	/**
 	 * The resource the player is receiving
 	 */
-	Resource outputResource;
+	ResourceType outputResource;
 
 	/**
 	 * Creates an instance of the MaritimeTrade input parameters object
@@ -39,8 +41,8 @@ public class MaritimeTradeInput extends InputObject {
 	 */
 	public MaritimeTradeInput(int playerID, 
 							  int ratio, 
-							  Resource inputResource, 
-							  Resource outputResource) {
+							  ResourceType inputResource, 
+							  ResourceType outputResource) {
 		this.playerID = playerID;
 		this.ratio = ratio;
 		this.inputResource = inputResource;
@@ -63,19 +65,19 @@ public class MaritimeTradeInput extends InputObject {
 		this.ratio = ratio;
 	}
 
-	public Resource getInputResource() {
+	public ResourceType getInputResource() {
 		return inputResource;
 	}
 
-	public void setInputResource(Resource inputResource) {
+	public void setInputResource(ResourceType inputResource) {
 		this.inputResource = inputResource;
 	}
 
-	public Resource getOutputResource() {
+	public ResourceType getOutputResource() {
 		return outputResource;
 	}
 
-	public void setOutputResource(Resource outputResource) {
+	public void setOutputResource(ResourceType outputResource) {
 		this.outputResource = outputResource;
 	}
 }

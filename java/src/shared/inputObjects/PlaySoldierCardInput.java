@@ -20,24 +20,24 @@ public class PlaySoldierCardInput extends InputObject {
 	/**
 	 * The player being robbed (if any)
 	 */
-	PlayerIndex victimIndex;
+	int victimID;
 
 	/**
 	 * Creates an instance of the PlaySoldierCard input parameters object
 	 * @param playerID The ID of the player playing the soldier card
 	 * @param location The new robber location
-	 * @param victimIndex The player being robbed (if any)
+	 * @param victimID The player being robbed (if any)
 	 * @pre 1. playerID is not null and is an existing player<br/>
 	 * 		2. location is not null and is a valid HexLocation<br/>
-	 * 		3. victimIndex is not null and is an existing player
+	 * 		3. victimID is not null and is an existing player
 	 * @post A PlaySoldierCardInput object is created
 	 */
 	public PlaySoldierCardInput(int playerID, 
 								HexLocation location, 
-								PlayerIndex victimIndex) {
+								int victimID) {
 		this.playerID = playerID;
 		this.location = location;
-		this.victimIndex = victimIndex;
+		this.victimID = victimID;
 	}
 
 	public int getPlayerID() {
@@ -56,11 +56,11 @@ public class PlaySoldierCardInput extends InputObject {
 		this.location = location;
 	}
 
-	public PlayerIndex getVictimIndex() {
-		return victimIndex;
+	public int getVictimID() {
+		return victimID;
 	}
 
-	public void setVictimIndex(PlayerIndex victimIndex) {
-		this.victimIndex = victimIndex;
+	public void setVictimID(int victimID) {
+		this.victimID = victimID;
 	}
 }

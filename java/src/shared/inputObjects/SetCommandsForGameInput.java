@@ -1,5 +1,7 @@
 package shared.inputObjects;
 
+import java.util.List;
+
 /**
  * Holds the input parameters needed for SetCommandsForGame()
  */
@@ -16,6 +18,10 @@ public class SetCommandsForGameInput extends InputObject {
 	String password;
 
 	/**
+	 * The List of commands to be set
+	 */
+	List<String> commands;
+	/**
 	 * Creates an instance of the SetCommandsForGame input parameters object
 	 * @param userName The userName of the player
 	 * @param password The password of the player
@@ -23,9 +29,11 @@ public class SetCommandsForGameInput extends InputObject {
 	 * @post A SetCommandsForGameInput object is created
 	 */
 	public SetCommandsForGameInput(String userName, 
-						  String password) {
+						  		   String password,
+						  		   List<String> commands) {
 		this.userName = userName;
 		this.password = password;
+		this.commands = commands;
 	}
 
 	public String getUserName() {
@@ -42,5 +50,13 @@ public class SetCommandsForGameInput extends InputObject {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<String> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
 	}
 }

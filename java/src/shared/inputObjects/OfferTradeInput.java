@@ -18,24 +18,24 @@ public class OfferTradeInput extends InputObject {
 	/**
 	 * The player receiving the offer
 	 */
-	PlayerIndex receiver;
+	int receiverID;
 
 	/**
 	 * Creates an instance of the OfferTrade input parameters object
 	 * @param playerID The ID of the player offering the trade
 	 * @param offer The cards the person is offering and wanting to receive (as negative numbers)
-	 * @param receiver The player receiving the offer
+	 * @param receiverID The player receiving the offer
 	 * @pre 1. playerID is not null and is an existing player<br/>
 	 * 		2. offer is not null and contains valid cards<br/>
-	 * 		3. receiver is not null and is an existing player other than the player offering the trade
+	 * 		3. receiverID is not null and is an existing player other than the player offering the trade
 	 * @post An OfferTradeInput object is created
 	 */
 	public OfferTradeInput(int playerID, 
 						   ResourceHand offer, 
-						   PlayerIndex receiver) {
+						   int receiverID) {
 		this.playerID = playerID;
 		this.offer = offer;
-		this.receiver = receiver;
+		this.receiverID = receiverID;
 	}
 
 	public int getPlayerID() {
@@ -54,11 +54,11 @@ public class OfferTradeInput extends InputObject {
 		this.offer = offer;
 	}
 
-	public PlayerIndex getReceiver() {
-		return receiver;
+	public int getReceiverID() {
+		return receiverID;
 	}
 
-	public void setReceiver(PlayerIndex receiver) {
-		this.receiver = receiver;
+	public void setReceiverID(int receiverID) {
+		this.receiverID = receiverID;
 	}
 }

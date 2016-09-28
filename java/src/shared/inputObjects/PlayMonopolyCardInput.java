@@ -1,5 +1,7 @@
 package shared.inputObjects;
 
+import shared.definitions.ResourceType;
+
 /**
  * Holds the input parameters needed for PlayMonopolyCard()
  */
@@ -13,7 +15,7 @@ public class PlayMonopolyCardInput extends InputObject {
 	/**
 	 * The resource to be taken from all other players
 	 */
-	Resource resource;
+	ResourceType resource;
 
 	/**
 	 * Creates an instance of the PlayMonopolyCard input parameters object
@@ -22,7 +24,7 @@ public class PlayMonopolyCardInput extends InputObject {
 	 * @pre playerID is not null and is an existing player and resource is not null and is a valid resource
 	 */
 	public PlayMonopolyCardInput(int playerID, 
-								 Resource resource) {
+								 ResourceType resource) {
 		this.playerID = playerID;
 		this.resource = resource;
 	}
@@ -35,11 +37,11 @@ public class PlayMonopolyCardInput extends InputObject {
 		this.playerID = playerID;
 	}
 
-	public Resource getResource() {
+	public ResourceType getResource() {
 		return resource;
 	}
 
-	public void setResource(Resource resource) {
+	public void setResource(ResourceType resource) {
 		this.resource = resource;
 	}
 }
