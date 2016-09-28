@@ -37,6 +37,14 @@ public class MockProxy implements IServer {
 	@Override
 	public LoginUserOutput LoginUser(LoginUserInput input) throws ClientException {
 		
+		/*
+			 Response Body
+			 	Success
+			 Response Code
+			 	200
+			 Response Headers
+			 	{"Access-Control-Allow-Origin":"*","Date":"Sun, 25 Sep 2016 13:07:37 GMT","Content-Length":"7","Content-Type":"text/html"}
+		 */
 		return new LoginUserOutput();
 	}
 
@@ -58,6 +66,14 @@ public class MockProxy implements IServer {
 	@Override
 	public RegisterUserOutput RegisterUser(RegisterUserInput input) throws ClientException {
 		
+		/*
+			Response Body
+				Success
+			Response Code
+				200
+			Response Headers
+				{"Access-Control-Allow-Origin":"*","Date":"Sun, 25 Sep 2016 13:12:37 GMT","Content-Length":"7","Content-Type":"text/html"}
+		 */
 		return new RegisterUserOutput();
 	}
 
@@ -74,6 +90,94 @@ public class MockProxy implements IServer {
 	@Override
 	public CurrentGamesOutput GetCurrentListOfGames() throws ClientException {
 		
+		/*
+		  	Response Body
+				[
+				  {
+				    "title": "Default Game",
+				    "id": 0,
+				    "players": [
+				      {
+				        "color": "orange",
+				        "name": "Sam",
+				        "id": 0
+				      },
+				      {
+				        "color": "blue",
+				        "name": "Brooke",
+				        "id": 1
+				      },
+				      {
+				        "color": "red",
+				        "name": "Pete",
+				        "id": 10
+				      },
+				      {
+				        "color": "green",
+				        "name": "Mark",
+				        "id": 11
+				      }
+				    ]
+				  },
+				  {
+				    "title": "AI Game",
+				    "id": 1,
+				    "players": [
+				      {
+				        "color": "orange",
+				        "name": "Pete",
+				        "id": 10
+				      },
+				      {
+				        "color": "blue",
+				        "name": "Ken",
+				        "id": -2
+				      },
+				      {
+				        "color": "green",
+				        "name": "Hannah",
+				        "id": -3
+				      },
+				      {
+				        "color": "white",
+				        "name": "Steve",
+				        "id": -4
+				      }
+				    ]
+				  },
+				  {
+				    "title": "Empty Game",
+				    "id": 2,
+				    "players": [
+				      {
+				        "color": "orange",
+				        "name": "Sam",
+				        "id": 0
+				      },
+				      {
+				        "color": "blue",
+				        "name": "Brooke",
+				        "id": 1
+				      },
+				      {
+				        "color": "red",
+				        "name": "Pete",
+				        "id": 10
+				      },
+				      {
+				        "color": "green",
+				        "name": "Mark",
+				        "id": 11
+				      }
+				    ]
+				  }
+				]
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:13:56 GMT","Content-Length":"602","Content-Type":"application/json"}
+		 
+		 */
 		return new CurrentGamesOutput();
 	}
 
@@ -94,6 +198,23 @@ public class MockProxy implements IServer {
 	@Override
 	public CreateGameOutput CreateGame(CreateGameInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				{
+				  "title": "testGame",
+				  "id": 3,
+				  "players": [
+				    {},
+				    {},
+				    {},
+				    {}
+				  ]
+				}
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:17:06 GMT","Content-Length":"51","Content-Type":"application/json"}
+		 */
 		return new CreateGameOutput();
 	}
 
@@ -116,6 +237,14 @@ public class MockProxy implements IServer {
 	@Override
 	public JoinGameOutput JoinGame(JoinGameInput input) throws ClientException {
 		
+		/*
+		  	Response Body
+				Success
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:19:59 GMT","Content-Length":"7","Content-Type":"text/html"}
+		 */
 		return new JoinGameOutput();
 	}
 
@@ -135,6 +264,14 @@ public class MockProxy implements IServer {
 	@Override
 	public SaveGameOutput SaveGame(SaveGameInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				Could not save game
+			Response Code
+				400
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:22:59 GMT","Content-Length":"19","Content-Type":"text/html"}
+		 */
 		return new SaveGameOutput();
 	}
 
@@ -152,6 +289,14 @@ public class MockProxy implements IServer {
 	@Override
 	public LoadGameOutput LoadGame(LoadGameInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				Could not load game
+			Response Code
+				400
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:25:39 GMT","Content-Length":"19","Content-Type":"text/html"}
+		 */
 		return new LoadGameOutput();
 	}
 
@@ -173,6 +318,324 @@ public class MockProxy implements IServer {
 	public UpdateCurrentGameStateOutput UpdateCurrentGameState(UpdateCurrentGameStateInput input)
 			throws ClientException {
 		
+		/*
+		 	Response Body
+				{
+				  "deck": {
+				    "yearOfPlenty": 2,
+				    "monopoly": 2,
+				    "soldier": 14,
+				    "roadBuilding": 2,
+				    "monument": 5
+				  },
+				  "map": {
+				    "hexes": [
+				      {
+				        "location": {
+				          "x": 0,
+				          "y": -2
+				        }
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": 1,
+				          "y": -2
+				        },
+				        "number": 4
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 2,
+				          "y": -2
+				        },
+				        "number": 11
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": -1,
+				          "y": -1
+				        },
+				        "number": 8
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 0,
+				          "y": -1
+				        },
+				        "number": 3
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": 1,
+				          "y": -1
+				        },
+				        "number": 9
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": 2,
+				          "y": -1
+				        },
+				        "number": 12
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": -2,
+				          "y": 0
+				        },
+				        "number": 5
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": -1,
+				          "y": 0
+				        },
+				        "number": 10
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 0,
+				          "y": 0
+				        },
+				        "number": 11
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": 1,
+				          "y": 0
+				        },
+				        "number": 5
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 2,
+				          "y": 0
+				        },
+				        "number": 6
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": -2,
+				          "y": 1
+				        },
+				        "number": 2
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": -1,
+				          "y": 1
+				        },
+				        "number": 9
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 0,
+				          "y": 1
+				        },
+				        "number": 4
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": 1,
+				          "y": 1
+				        },
+				        "number": 10
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": -2,
+				          "y": 2
+				        },
+				        "number": 6
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": -1,
+				          "y": 2
+				        },
+				        "number": 3
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 0,
+				          "y": 2
+				        },
+				        "number": 8
+				      }
+				    ],
+				    "roads": [],
+				    "cities": [],
+				    "settlements": [],
+				    "radius": 3,
+				    "ports": [
+				      {
+				        "ratio": 2,
+				        "resource": "ore",
+				        "direction": "S",
+				        "location": {
+				          "x": 1,
+				          "y": -3
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "NW",
+				        "location": {
+				          "x": 2,
+				          "y": 1
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "brick",
+				        "direction": "NE",
+				        "location": {
+				          "x": -2,
+				          "y": 3
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "N",
+				        "location": {
+				          "x": 0,
+				          "y": 3
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "wood",
+				        "direction": "NE",
+				        "location": {
+				          "x": -3,
+				          "y": 2
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "SE",
+				        "location": {
+				          "x": -3,
+				          "y": 0
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "sheep",
+				        "direction": "NW",
+				        "location": {
+				          "x": 3,
+				          "y": -1
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "wheat",
+				        "direction": "S",
+				        "location": {
+				          "x": -1,
+				          "y": -2
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "SW",
+				        "location": {
+				          "x": 3,
+				          "y": -3
+				        }
+				      }
+				    ],
+				    "robber": {
+				      "x": 0,
+				      "y": -2
+				    }
+				  },
+				  "players": [
+				    {
+				      "resources": {
+				        "brick": 0,
+				        "wood": 0,
+				        "sheep": 0,
+				        "wheat": 0,
+				        "ore": 0
+				      },
+				      "oldDevCards": {
+				        "yearOfPlenty": 0,
+				        "monopoly": 0,
+				        "soldier": 0,
+				        "roadBuilding": 0,
+				        "monument": 0
+				      },
+				      "newDevCards": {
+				        "yearOfPlenty": 0,
+				        "monopoly": 0,
+				        "soldier": 0,
+				        "roadBuilding": 0,
+				        "monument": 0
+				      },
+				      "roads": 15,
+				      "cities": 4,
+				      "settlements": 5,
+				      "soldiers": 0,
+				      "victoryPoints": 0,
+				      "monuments": 0,
+				      "playedDevCard": false,
+				      "discarded": false,
+				      "playerID": 14,
+				      "playerIndex": 0,
+				      "name": "test1",
+				      "color": "blue"
+				    },
+				    null,
+				    null,
+				    null
+				  ],
+				  "log": {
+				    "lines": []
+				  },
+				  "chat": {
+				    "lines": []
+				  },
+				  "bank": {
+				    "brick": 24,
+				    "wood": 24,
+				    "sheep": 24,
+				    "wheat": 24,
+				    "ore": 24
+				  },
+				  "turnTracker": {
+				    "status": "FirstRound",
+				    "currentTurn": 0,
+				    "longestRoad": -1,
+				    "largestArmy": -1
+				  },
+				  "winner": -1,
+				  "version": 0
+				}
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:28:01 GMT","Content-Length":"2492","Content-Type":"application/json"}
+		 */
 		return null;// new UpdateCurrentGameStateOutput(null);
 	}
 
@@ -194,6 +657,324 @@ public class MockProxy implements IServer {
 	@Override
 	public ResetGameOutput ResetGame(ResetGameInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				{
+				  "deck": {
+				    "yearOfPlenty": 2,
+				    "monopoly": 2,
+				    "soldier": 14,
+				    "roadBuilding": 2,
+				    "monument": 5
+				  },
+				  "map": {
+				    "hexes": [
+				      {
+				        "location": {
+				          "x": 0,
+				          "y": -2
+				        }
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": 1,
+				          "y": -2
+				        },
+				        "number": 4
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 2,
+				          "y": -2
+				        },
+				        "number": 11
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": -1,
+				          "y": -1
+				        },
+				        "number": 8
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 0,
+				          "y": -1
+				        },
+				        "number": 3
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": 1,
+				          "y": -1
+				        },
+				        "number": 9
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": 2,
+				          "y": -1
+				        },
+				        "number": 12
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": -2,
+				          "y": 0
+				        },
+				        "number": 5
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": -1,
+				          "y": 0
+				        },
+				        "number": 10
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 0,
+				          "y": 0
+				        },
+				        "number": 11
+				      },
+				      {
+				        "resource": "brick",
+				        "location": {
+				          "x": 1,
+				          "y": 0
+				        },
+				        "number": 5
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 2,
+				          "y": 0
+				        },
+				        "number": 6
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": -2,
+				          "y": 1
+				        },
+				        "number": 2
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": -1,
+				          "y": 1
+				        },
+				        "number": 9
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": 0,
+				          "y": 1
+				        },
+				        "number": 4
+				      },
+				      {
+				        "resource": "sheep",
+				        "location": {
+				          "x": 1,
+				          "y": 1
+				        },
+				        "number": 10
+				      },
+				      {
+				        "resource": "wood",
+				        "location": {
+				          "x": -2,
+				          "y": 2
+				        },
+				        "number": 6
+				      },
+				      {
+				        "resource": "ore",
+				        "location": {
+				          "x": -1,
+				          "y": 2
+				        },
+				        "number": 3
+				      },
+				      {
+				        "resource": "wheat",
+				        "location": {
+				          "x": 0,
+				          "y": 2
+				        },
+				        "number": 8
+				      }
+				    ],
+				    "roads": [],
+				    "cities": [],
+				    "settlements": [],
+				    "radius": 3,
+				    "ports": [
+				      {
+				        "ratio": 2,
+				        "resource": "ore",
+				        "direction": "S",
+				        "location": {
+				          "x": 1,
+				          "y": -3
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "NW",
+				        "location": {
+				          "x": 2,
+				          "y": 1
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "brick",
+				        "direction": "NE",
+				        "location": {
+				          "x": -2,
+				          "y": 3
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "N",
+				        "location": {
+				          "x": 0,
+				          "y": 3
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "wood",
+				        "direction": "NE",
+				        "location": {
+				          "x": -3,
+				          "y": 2
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "SE",
+				        "location": {
+				          "x": -3,
+				          "y": 0
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "sheep",
+				        "direction": "NW",
+				        "location": {
+				          "x": 3,
+				          "y": -1
+				        }
+				      },
+				      {
+				        "ratio": 2,
+				        "resource": "wheat",
+				        "direction": "S",
+				        "location": {
+				          "x": -1,
+				          "y": -2
+				        }
+				      },
+				      {
+				        "ratio": 3,
+				        "direction": "SW",
+				        "location": {
+				          "x": 3,
+				          "y": -3
+				        }
+				      }
+				    ],
+				    "robber": {
+				      "x": 0,
+				      "y": -2
+				    }
+				  },
+				  "players": [
+				    {
+				      "resources": {
+				        "brick": 0,
+				        "wood": 0,
+				        "sheep": 0,
+				        "wheat": 0,
+				        "ore": 0
+				      },
+				      "oldDevCards": {
+				        "yearOfPlenty": 0,
+				        "monopoly": 0,
+				        "soldier": 0,
+				        "roadBuilding": 0,
+				        "monument": 0
+				      },
+				      "newDevCards": {
+				        "yearOfPlenty": 0,
+				        "monopoly": 0,
+				        "soldier": 0,
+				        "roadBuilding": 0,
+				        "monument": 0
+				      },
+				      "roads": 15,
+				      "cities": 4,
+				      "settlements": 5,
+				      "soldiers": 0,
+				      "victoryPoints": 0,
+				      "monuments": 0,
+				      "playedDevCard": false,
+				      "discarded": false,
+				      "playerID": 14,
+				      "playerIndex": 0,
+				      "name": "test1",
+				      "color": "blue"
+				    },
+				    null,
+				    null,
+				    null
+				  ],
+				  "log": {
+				    "lines": []
+				  },
+				  "chat": {
+				    "lines": []
+				  },
+				  "bank": {
+				    "brick": 24,
+				    "wood": 24,
+				    "sheep": 24,
+				    "wheat": 24,
+				    "ore": 24
+				  },
+				  "turnTracker": {
+				    "status": "FirstRound",
+				    "currentTurn": 0,
+				    "longestRoad": -1,
+				    "largestArmy": -1
+				  },
+				  "winner": -1,
+				  "version": 0
+				}
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:29:24 GMT","Content-Length":"2492","Content-Type":"application/json"}
+		 */
 		return new ResetGameOutput();
 	}
 
@@ -244,6 +1025,16 @@ public class MockProxy implements IServer {
 	@Override
 	public AITypesOutput GetAITypes() throws ClientException {
 		
+		/*
+		 	Response Body
+				[
+				  "LARGEST_ARMY"
+				]
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:34:47 GMT","Content-Length":"16","Content-Type":"application/json"}
+		 */
 		return new AITypesOutput();
 	}
 
@@ -263,6 +1054,14 @@ public class MockProxy implements IServer {
 	@Override
 	public AddAIPlayerOutput AddAIPlayer(AddAIPlayerInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				Success
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:36:05 GMT","Content-Length":"7","Content-Type":"text/html"}
+		 */
 		return new AddAIPlayerOutput();
 	}
 
@@ -280,6 +1079,14 @@ public class MockProxy implements IServer {
 	@Override
 	public ServerLogLevelOutput SetServerLogLevel(ServerLogLevelInput input) throws ClientException {
 		
+		/*
+		 	Response Body
+				Success
+			Response Code
+				200
+			Response Headers
+				{"Date":"Sun, 25 Sep 2016 13:37:35 GMT","Content-Length":"7","Content-Type":"text/html"}
+		 */
 		return new ServerLogLevelOutput();
 	}
 
